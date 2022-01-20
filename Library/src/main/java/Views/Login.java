@@ -6,6 +6,10 @@ package Views;
 import Settings.config;
 import java.awt.Color;
 
+//import Data.FunctionsCategory;
+//import Logic.ClassCategory;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eduardo
@@ -19,6 +23,14 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         
         initComponents();
+        /*
+        ClassCategory category = new ClassCategory(1, "name nuevo", "description nuevo");
+        
+        FunctionsCategory functionsCategory = new FunctionsCategory();
+        
+        if (functionsCategory.SaveCategory(category)) {
+            JOptionPane.showMessageDialog(null,"Se ha registrado correctamente la categoria");
+        }*/
         
     }
 

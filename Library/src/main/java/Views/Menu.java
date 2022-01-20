@@ -303,15 +303,23 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRentaMouseClicked
 
     private void btnRentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseEntered
-        // TODO add your handling code here:
+        btnCliente.setBackground(new Color(85,211,128));
     }//GEN-LAST:event_btnRentaMouseEntered
 
     private void btnRentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseExited
-        // TODO add your handling code here:
+        btnCliente.setBackground(new Color(63,162,97));
     }//GEN-LAST:event_btnRentaMouseExited
 
     private void btnMantenimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMantenimientosMouseClicked
         // TODO add your handling code here:
+        PanelMantenimientos pMantenimientos = new PanelMantenimientos();
+        pMantenimientos.setSize(850, 670);
+        pMantenimientos.setLocation(0, 0);
+        
+        contenedor.removeAll();
+        contenedor.add(pMantenimientos, BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
     }//GEN-LAST:event_btnMantenimientosMouseClicked
 
     private void btnMantenimientosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMantenimientosMouseEntered

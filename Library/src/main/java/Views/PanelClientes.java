@@ -133,7 +133,7 @@ public class PanelClientes extends javax.swing.JPanel {
         lblTitulo.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Registro de cliente");
-        add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 460, 30));
+        add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
 
         jTextField2.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(68, 68, 68));
