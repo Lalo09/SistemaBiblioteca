@@ -5,6 +5,23 @@
 package Views;
 
 import java.awt.Color;
+import Logic.ClassCategory;
+import Data.FunctionsCategory;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+/*
+*Notas:
+*En cada crud implementar funcionalidad de:
+*   Insertar - Create
+*   Mostrar  -  Read
+*   Actualizar - Update
+*   Eliminar  -  Delete
+*
+*   Solo en libros y clientes implementar la funcionalidad de buscar
+*/
 
 /**
  *
@@ -12,11 +29,35 @@ import java.awt.Color;
  */
 public class PanelMantenimientos extends javax.swing.JPanel {
 
+    DefaultTableModel modeloTablaCategoria = new DefaultTableModel();
+    
     /**
      * Creates new form PanelClientes
      */
     public PanelMantenimientos() {
         initComponents();
+        CargarColumnasCategoria();
+        lblId.setVisible(false);
+        lblEditando.setVisible(false);
+    }
+    
+    //Metodo para cargar las columnas en la tabla
+    private void CargarColumnasCategoria(){
+       modeloTablaCategoria.addColumn("id");
+       modeloTablaCategoria.addColumn("Nombre");
+       modeloTablaCategoria.addColumn("Descripcion");
+       
+       FunctionsCategory funcionesCategoria = new FunctionsCategory();
+       ArrayList<ClassCategory> lista = funcionesCategoria.showCategories();
+       
+       int cantCategoria =lista.size();
+       modeloTablaCategoria.setNumRows(cantCategoria);
+       for (int i = 0; i < cantCategoria; i++) {
+            ClassCategory categoria = lista.get(i);
+            modeloTablaCategoria.setValueAt(categoria.getId(), i, 0);
+            modeloTablaCategoria.setValueAt(categoria.getName(), i, 1);
+            modeloTablaCategoria.setValueAt(categoria.getDescription(), i, 2);
+        }
     }
 
     /**
@@ -35,31 +76,28 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         PanelUsuarios = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtDescription = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel17 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jSeparator14 = new javax.swing.JSeparator();
-        btnEnter2 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        btnEnter = new javax.swing.JPanel();
+        TablaCategorias = new javax.swing.JTable();
+        btnSave = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnEnter1 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         btnEnter3 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
+        lblEditando = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(254, 254, 254));
         setPreferredSize(new java.awt.Dimension(890, 670));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelCategorias.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("Categorias", PanelCategorias);
+        jTabbedPane1.addTab("Usuarios", PanelCategorias);
 
         PanelAutores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jTabbedPane1.addTab("Autores", PanelAutores);
@@ -80,10 +118,10 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         jLabel8.setText("Nombre");
         PanelUsuarios.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(68, 68, 68));
-        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        PanelUsuarios.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 320, 30));
+        txtName.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtName.setForeground(new java.awt.Color(68, 68, 68));
+        txtName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        PanelUsuarios.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 320, 30));
         PanelUsuarios.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 320, 10));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -91,111 +129,62 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         jLabel9.setText("Descripcion");
         PanelUsuarios.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
-        jTextField2.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(68, 68, 68));
-        jTextField2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        PanelUsuarios.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 320, 30));
+        txtDescription.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtDescription.setForeground(new java.awt.Color(68, 68, 68));
+        txtDescription.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        PanelUsuarios.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 320, 30));
         PanelUsuarios.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 320, 10));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        PanelUsuarios.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 730, 160));
-
-        jLabel17.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(66, 62, 62));
-        jLabel17.setText("Buscar:");
-        PanelUsuarios.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, -1, -1));
-
-        jTextField13.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        jTextField13.setForeground(new java.awt.Color(68, 68, 68));
-        jTextField13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        PanelUsuarios.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 370, 30));
-        PanelUsuarios.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, 370, 10));
-
-        btnEnter2.setBackground(new java.awt.Color(211, 85, 139));
-        btnEnter2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEnter2.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaCategorias.setModel(modeloTablaCategoria);
+        TablaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEnter2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEnter2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEnter2MouseExited(evt);
+                TablaCategoriasMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(TablaCategorias);
 
-        jLabel19.setFont(new java.awt.Font("Roboto", 0, 15)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel19.setIcon(new javax.swing.ImageIcon("/resources/login.png")); // NOI18N
-        jLabel19.setText("Buscar");
+        PanelUsuarios.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 730, 250));
 
-        javax.swing.GroupLayout btnEnter2Layout = new javax.swing.GroupLayout(btnEnter2);
-        btnEnter2.setLayout(btnEnter2Layout);
-        btnEnter2Layout.setHorizontalGroup(
-            btnEnter2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEnter2Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(jLabel19)
-                .addGap(43, 43, 43))
-        );
-        btnEnter2Layout.setVerticalGroup(
-            btnEnter2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnEnter2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        PanelUsuarios.add(btnEnter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 170, -1));
-
-        btnEnter.setBackground(new java.awt.Color(85, 211, 128));
-        btnEnter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEnter.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSave.setBackground(new java.awt.Color(85, 211, 128));
+        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEnterMouseClicked(evt);
+                btnSaveMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEnterMouseEntered(evt);
+                btnSaveMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEnterMouseExited(evt);
+                btnSaveMouseExited(evt);
             }
         });
 
         jLabel5.setForeground(new java.awt.Color(254, 254, 254));
         jLabel5.setIcon(new javax.swing.ImageIcon("/resources/disquete.png")); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout btnEnterLayout = new javax.swing.GroupLayout(btnEnter);
-        btnEnter.setLayout(btnEnterLayout);
-        btnEnterLayout.setHorizontalGroup(
-            btnEnterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEnterLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnSaveLayout = new javax.swing.GroupLayout(btnSave);
+        btnSave.setLayout(btnSaveLayout);
+        btnSaveLayout.setHorizontalGroup(
+            btnSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSaveLayout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(36, 36, 36))
         );
-        btnEnterLayout.setVerticalGroup(
-            btnEnterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnEnterLayout.createSequentialGroup()
+        btnSaveLayout.setVerticalGroup(
+            btnSaveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnSaveLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        PanelUsuarios.add(btnEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 100, 60));
+        PanelUsuarios.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 100, 60));
 
         btnEnter1.setBackground(new java.awt.Color(255, 38, 0));
         btnEnter1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -272,39 +261,61 @@ public class PanelMantenimientos extends javax.swing.JPanel {
 
         PanelUsuarios.add(btnEnter3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 100, 60));
 
-        jTabbedPane1.addTab("Usuarios", PanelUsuarios);
+        lblId.setText("0");
+        PanelUsuarios.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
+
+        lblEditando.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblEditando.setForeground(new java.awt.Color(254, 1, 1));
+        lblEditando.setText("Editando informacion de");
+        PanelUsuarios.add(lblEditando, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
+
+        jTabbedPane1.addTab("Categorias", PanelUsuarios);
 
         add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 660));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEnter2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnter2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnter2MouseClicked
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        String name = txtName.getText().trim();
+        String description = txtDescription.getText().trim();
+        
+        ClassCategory category = new ClassCategory(Integer.parseInt(lblId.getText()), name, description);
+        FunctionsCategory functions = new FunctionsCategory();
+        
+        if (Integer.parseInt(lblId.getText()) == 0) {
+            if (functions.SaveCategory(category)) {
+            JOptionPane.showMessageDialog(null,"Se ha registrado correctamente categoria con el nombre: "+name);
+            limpiarFormCategoria();            
+            }else{
+                JOptionPane.showMessageDialog(null,"Error al registrar la informacion, compruebe los datos ingresados");
+            }
+        }else{
+            if (functions.UpdateCategory(category)) {
+            JOptionPane.showMessageDialog(null,"Se ha actualizado correctamente la categoria");
+            limpiarFormCategoria();            
+            }else{
+                JOptionPane.showMessageDialog(null,"Error al aactualizar la informacion, compruebe los datos ingresados");
+            }
+        }
+    }//GEN-LAST:event_btnSaveMouseClicked
 
-    private void btnEnter2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnter2MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnter2MouseEntered
+    private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
+        btnSave.setBackground(new Color(63,162,97));
+    }//GEN-LAST:event_btnSaveMouseEntered
 
-    private void btnEnter2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnter2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnter2MouseExited
-
-    private void btnEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnterMouseClicked
-
-    private void btnEnterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseEntered
-        // TODO add your handling code here:
-        btnEnter.setBackground(new Color(63,162,97));
-    }//GEN-LAST:event_btnEnterMouseEntered
-
-    private void btnEnterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseExited
-        // TODO add your handling code here:
-        btnEnter.setBackground(new Color(85,211,128));
-    }//GEN-LAST:event_btnEnterMouseExited
+    private void btnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseExited
+        btnSave.setBackground(new Color(85,211,128));
+    }//GEN-LAST:event_btnSaveMouseExited
 
     private void btnEnter1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnter1MouseClicked
-        // TODO add your handling code here:
+        FunctionsCategory functions = new FunctionsCategory();
+        
+        if (functions.DeleteCategory(Integer.parseInt(lblId.getText()))) {
+            JOptionPane.showMessageDialog(null,"Categoria eliminada correctamente");
+            limpiarFormCategoria();  
+        }else{
+            JOptionPane.showMessageDialog(null,"No se puede eliminar esta categoria debido a que contiene libros");
+        }
+
     }//GEN-LAST:event_btnEnter1MouseClicked
 
     private void btnEnter1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnter1MouseEntered
@@ -317,6 +328,7 @@ public class PanelMantenimientos extends javax.swing.JPanel {
 
     private void btnEnter3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnter3MouseClicked
         // TODO add your handling code here:
+        limpiarFormCategoria();
     }//GEN-LAST:event_btnEnter3MouseClicked
 
     private void btnEnter3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnter3MouseEntered
@@ -327,32 +339,58 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEnter3MouseExited
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void TablaCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCategoriasMouseClicked
+        int index = TablaCategorias.getSelectedRow();
+        TableModel model = TablaCategorias.getModel();
+        int id = Integer.parseInt(model.getValueAt(index,0).toString());
+        String name = model.getValueAt(index,1).toString();
+        String description = model.getValueAt(index,2).toString();
+        
+        lblId.setText(""+id);
+        txtName.setText(name);
+        txtDescription.setText(description);
+
+        lblEditando.setVisible(true);
+        lblEditando.setText("Editando informacion de "+name);
+    }//GEN-LAST:event_TablaCategoriasMouseClicked
+
+    //Funciones propias
+    private void limpiarFormCategoria(){
+        modeloTablaCategoria.setRowCount(0);
+        modeloTablaCategoria.setColumnCount(0);
+        txtName.setText("");
+        txtDescription.setText("");
+        CargarColumnasCategoria();
+        lblId.setText(""+0);
+        lblEditando.setVisible(false);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAutores;
     private javax.swing.JPanel PanelCategorias;
     private javax.swing.JPanel PanelEditoriales;
     private javax.swing.JPanel PanelUsuarios;
-    private javax.swing.JPanel btnEnter;
+    private javax.swing.JTable TablaCategorias;
     private javax.swing.JPanel btnEnter1;
-    private javax.swing.JPanel btnEnter2;
     private javax.swing.JPanel btnEnter3;
-    private javax.swing.JLabel jLabel17;
+    private javax.swing.JPanel btnSave;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblEditando;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextField txtDescription;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

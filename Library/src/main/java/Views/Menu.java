@@ -242,17 +242,14 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClienteMouseExited
-        // TODO add your handling code here:
         btnCliente.setBackground(new Color(85,211,128));
     }//GEN-LAST:event_btnClienteMouseExited
 
     private void btnClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClienteMouseEntered
-        // TODO add your handling code here:
         btnCliente.setBackground(new Color(63,162,97));
     }//GEN-LAST:event_btnClienteMouseEntered
 
     private void btnClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClienteMouseClicked
-        // TODO add your handling code here:
         PanelClientes pcliente = new PanelClientes();
         pcliente.setSize(850, 670);
         pcliente.setLocation(0, 0);
@@ -265,7 +262,6 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClienteMouseClicked
 
     private void btnLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLibrosMouseClicked
-        // TODO add your handling code here:
         PanelLibros pLibros = new PanelLibros();
         pLibros.setSize(850, 670);
         pLibros.setLocation(0, 0);
@@ -277,13 +273,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLibrosMouseClicked
 
     private void btnLibrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLibrosMouseEntered
-        // TODO add your handling code here:
-        btnCliente.setBackground(new Color(85,211,128));
+        btnLibros.setBackground(new Color(63,162,97));
     }//GEN-LAST:event_btnLibrosMouseEntered
 
     private void btnLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLibrosMouseExited
-        // TODO add your handling code here:
-        btnCliente.setBackground(new Color(63,162,97));
+        btnLibros.setBackground(new Color(85,211,128));
     }//GEN-LAST:event_btnLibrosMouseExited
 
     private void btnDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionMouseClicked
@@ -291,11 +285,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDevolucionMouseClicked
 
     private void btnDevolucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionMouseEntered
-        // TODO add your handling code here:
+        btnDevolucion.setBackground(new Color(63,162,97));
     }//GEN-LAST:event_btnDevolucionMouseEntered
 
     private void btnDevolucionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionMouseExited
-        // TODO add your handling code here:
+        btnDevolucion.setBackground(new Color(85,211,128));
     }//GEN-LAST:event_btnDevolucionMouseExited
 
     private void btnRentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseClicked
@@ -303,11 +297,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRentaMouseClicked
 
     private void btnRentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseEntered
-        btnCliente.setBackground(new Color(85,211,128));
+        btnRenta.setBackground(new Color(63,162,97));
     }//GEN-LAST:event_btnRentaMouseEntered
 
     private void btnRentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseExited
-        btnCliente.setBackground(new Color(63,162,97));
+        btnRenta.setBackground(new Color(85,211,128));
     }//GEN-LAST:event_btnRentaMouseExited
 
     private void btnMantenimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMantenimientosMouseClicked
@@ -323,11 +317,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenimientosMouseClicked
 
     private void btnMantenimientosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMantenimientosMouseEntered
-        // TODO add your handling code here:
+        btnMantenimientos.setBackground(new Color(63,162,97));
     }//GEN-LAST:event_btnMantenimientosMouseEntered
 
     private void btnMantenimientosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMantenimientosMouseExited
-        // TODO add your handling code here:
+        btnMantenimientos.setBackground(new Color(85,211,128));
     }//GEN-LAST:event_btnMantenimientosMouseExited
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
@@ -335,11 +329,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseClicked
 
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
-        // TODO add your handling code here:
+        btnReportes.setBackground(new Color(63,162,97));
     }//GEN-LAST:event_btnReportesMouseEntered
 
     private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
-        // TODO add your handling code here:
+        btnReportes.setBackground(new Color(85,211,128));
     }//GEN-LAST:event_btnReportesMouseExited
 
     /**
