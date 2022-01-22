@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Data;
-import Logic.ClassCategory;
 import Logic.ClassUser;
 import static Settings.config.*;
 import java.sql.DriverManager;
