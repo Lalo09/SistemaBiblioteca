@@ -4,7 +4,10 @@
  */
 package Views;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,11 +34,12 @@ public class PanelRenta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaLibros = new javax.swing.JTable();
         btnSave = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnClear = new javax.swing.JPanel();
@@ -43,20 +47,30 @@ public class PanelRenta extends javax.swing.JPanel {
         PanelForaneo = new javax.swing.JPanel();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
-        txtNombreEditorial = new javax.swing.JTextField();
+        txtNombreCliente = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtNombreCategoria = new javax.swing.JTextField();
+        txtNombreLibro = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
         lblAbrirPanelCategoria = new javax.swing.JLabel();
         lblAbrirPanelEditorial = new javax.swing.JLabel();
-        lblIdLibro = new javax.swing.JLabel();
-        lblIdEditorial = new javax.swing.JLabel();
-        lblIdCategoria = new javax.swing.JLabel();
-        jDayChooser1 = new com.toedter.calendar.JDayChooser();
+        lblIdRenta = new javax.swing.JLabel();
+        lblIdCliente = new javax.swing.JLabel();
+        lblPrecioRentaLibro = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTotalRenta = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        lblIdLibro = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        lblIdUser = new javax.swing.JLabel();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
         jPanel1.setPreferredSize(new java.awt.Dimension(890, 670));
@@ -65,21 +79,12 @@ public class PanelRenta extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(66, 62, 62));
         jLabel8.setText("Fecha Limite de devolucion");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         lblTitulo.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Renta de Libros");
         jPanel1.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 460, 40));
-
-        TablaLibros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaLibrosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(TablaLibros);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 458, 720, 140));
 
         btnSave.setBackground(new java.awt.Color(85, 211, 128));
         btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -164,34 +169,34 @@ public class PanelRenta extends javax.swing.JPanel {
         );
         PanelForaneoLayout.setVerticalGroup(
             PanelForaneoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 260, Short.MAX_VALUE)
         );
 
-        jPanel1.add(PanelForaneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 410, 340));
-        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 270, 10));
+        jPanel1.add(PanelForaneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 410, 260));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 270, 10));
 
         jLabel14.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(66, 62, 62));
         jLabel14.setText("Total:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 620, -1, -1));
 
-        txtNombreEditorial.setEditable(false);
-        txtNombreEditorial.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtNombreEditorial.setForeground(new java.awt.Color(68, 68, 68));
-        txtNombreEditorial.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(txtNombreEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 270, 30));
+        txtNombreCliente.setEditable(false);
+        txtNombreCliente.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtNombreCliente.setForeground(new java.awt.Color(68, 68, 68));
+        txtNombreCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 270, 30));
 
         jLabel15.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(66, 62, 62));
         jLabel15.setText("Libro");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
-        txtNombreCategoria.setEditable(false);
-        txtNombreCategoria.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtNombreCategoria.setForeground(new java.awt.Color(68, 68, 68));
-        txtNombreCategoria.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(txtNombreCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 270, 30));
-        jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 270, 10));
+        txtNombreLibro.setEditable(false);
+        txtNombreLibro.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtNombreLibro.setForeground(new java.awt.Color(68, 68, 68));
+        txtNombreLibro.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtNombreLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 270, 30));
+        jPanel1.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 270, 10));
 
         lblAbrirPanelCategoria.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAbrirPanelCategoria.setIcon(new javax.swing.ImageIcon("/resources/plus.png")); // NOI18N
@@ -201,7 +206,7 @@ public class PanelRenta extends javax.swing.JPanel {
                 lblAbrirPanelCategoriaMouseClicked(evt);
             }
         });
-        jPanel1.add(lblAbrirPanelCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, 40));
+        jPanel1.add(lblAbrirPanelCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, -1, 40));
 
         lblAbrirPanelEditorial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAbrirPanelEditorial.setIcon(new javax.swing.ImageIcon("/resources/plus.png")); // NOI18N
@@ -211,31 +216,74 @@ public class PanelRenta extends javax.swing.JPanel {
                 lblAbrirPanelEditorialMouseClicked(evt);
             }
         });
-        jPanel1.add(lblAbrirPanelEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, 40));
+        jPanel1.add(lblAbrirPanelEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, -1, 40));
 
-        lblIdLibro.setText("0");
-        jPanel1.add(lblIdLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, -1, -1));
+        lblIdRenta.setText("0");
+        jPanel1.add(lblIdRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, -1, -1));
 
-        lblIdEditorial.setText("0");
-        jPanel1.add(lblIdEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, -1, -1));
+        lblIdCliente.setText("0");
+        jPanel1.add(lblIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
 
-        lblIdCategoria.setText("0");
-        jPanel1.add(lblIdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 410, -1, -1));
-        jPanel1.add(jDayChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        lblPrecioRentaLibro.setText("0");
+        jPanel1.add(lblPrecioRentaLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(66, 62, 62));
         jLabel16.setText("Cliente");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, -1, -1));
+        lblTotalRenta.setText("jLabel2");
+        jPanel1.add(lblTotalRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("/resources/remove.png")); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 460, -1, 40));
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, -1, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon("/resources/add.png.png")); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 510, -1, -1));
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, -1, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 340, -1));
+
+        lblIdLibro.setText("0");
+        jPanel1.add(lblIdLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Num.", "Titulo", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 398, 670, 180));
+
+        lblIdUser.setText("lblIdUser");
+        jPanel1.add(lblIdUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -259,12 +307,10 @@ public class PanelRenta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TablaLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaLibrosMouseClicked
-       
-    }//GEN-LAST:event_TablaLibrosMouseClicked
-
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha_entrega =  dateFormat.format(jDateChooser1.getDate());
+        JOptionPane.showMessageDialog(this, fecha_entrega);
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
@@ -289,40 +335,82 @@ public class PanelRenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearMouseExited
 
     private void lblAbrirPanelCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbrirPanelCategoriaMouseClicked
+        PanelLibroRenta plibros = new PanelLibroRenta();
+        plibros.setSize(850, 670);
+        plibros.setLocation(0, 0);
         
+        PanelForaneo.removeAll();
+        PanelForaneo.add(plibros, BorderLayout.CENTER);
+        PanelForaneo.revalidate();
+        PanelForaneo.repaint();
     }//GEN-LAST:event_lblAbrirPanelCategoriaMouseClicked
 
     private void lblAbrirPanelEditorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbrirPanelEditorialMouseClicked
+        PanelClienteRenta pcliente = new PanelClienteRenta();
+        pcliente.setSize(850, 670);
+        pcliente.setLocation(0, 0);
         
+        PanelForaneo.removeAll();
+        PanelForaneo.add(pcliente, BorderLayout.CENTER);
+        PanelForaneo.revalidate();
+        PanelForaneo.repaint();
     }//GEN-LAST:event_lblAbrirPanelEditorialMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        model.addRow(new Object[]{lblIdLibro.getText(),txtNombreLibro.getText(),lblPrecioRentaLibro.getText()});
+        
+        double total = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            total += Double.parseDouble(model.getValueAt(i,2).toString());
+        }
+        lblTotalRenta.setText(""+total);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+        try {
+            //Seleccionar row
+            int selectedRow = jTable1.getSelectedRow();
+            model.removeRow(selectedRow);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Selecciona un libro a eliminar de la renta");
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelForaneo;
-    private javax.swing.JTable TablaLibros;
     private javax.swing.JPanel btnClear;
     private javax.swing.JPanel btnSave;
-    private com.toedter.calendar.JDayChooser jDayChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAbrirPanelCategoria;
     private javax.swing.JLabel lblAbrirPanelEditorial;
-    public static javax.swing.JLabel lblIdCategoria;
-    public static javax.swing.JLabel lblIdEditorial;
-    private javax.swing.JLabel lblIdLibro;
+    public static javax.swing.JLabel lblIdCliente;
+    public static javax.swing.JLabel lblIdLibro;
+    private javax.swing.JLabel lblIdRenta;
+    private javax.swing.JLabel lblIdUser;
+    public static javax.swing.JLabel lblPrecioRentaLibro;
     private javax.swing.JLabel lblTitulo;
-    public static javax.swing.JTextField txtNombreCategoria;
-    public static javax.swing.JTextField txtNombreEditorial;
+    private javax.swing.JLabel lblTotalRenta;
+    public static javax.swing.JTextField txtNombreCliente;
+    public static javax.swing.JTextField txtNombreLibro;
     // End of variables declaration//GEN-END:variables
 }
