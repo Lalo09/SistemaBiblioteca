@@ -293,7 +293,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDevolucionMouseExited
 
     private void btnRentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseClicked
-        // TODO add your handling code here:
+        PanelRenta pRenta = new PanelRenta();
+        pRenta.setSize(850, 670);
+        pRenta.setLocation(0, 0);
+        
+        contenedor.removeAll();
+        contenedor.add(pRenta, BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
     }//GEN-LAST:event_btnRentaMouseClicked
 
     private void btnRentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseEntered

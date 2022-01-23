@@ -192,15 +192,15 @@ public class FunctionsCategory {
    }
     
     //Obtener el id de una categoria dado su nombre
-    public int getIdCategory(String categoria){
-       int id=0;
+    public String getNameCategory(int id){
+       String name = "";
        try {
           conn = DriverManager.getConnection(ruta,usuario,pass);
-          String sql = "select id_category from category where name ="+categoria;
+          String sql = "select name from category where id_category ="+id;
           st = conn.prepareStatement(sql);
           rs = st.executeQuery();
           while (rs.next()) {               
-               id=rs.getInt("id_category");
+               name=rs.getString("name");
            }
        } catch (Exception e) {
            System.out.println(e.toString());
@@ -214,6 +214,6 @@ public class FunctionsCategory {
                ex.printStackTrace();
            }
        }
-       return id;
+       return name;
    }
 }

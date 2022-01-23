@@ -12,6 +12,9 @@ import Logic.ClassBook;
 import Data.FunctionsBook;
 import java.util.ArrayList;
 import javax.swing.table.TableModel;
+import Data.FunctionsAutor;
+import Data.FunctionsEditorial;
+import Data.FunctionsCategory;
 
 /**
  *
@@ -31,6 +34,10 @@ public class PanelLibros extends javax.swing.JPanel {
         initComponents();
         CargarColumnasLibro();
         lblEditandoLibro.setVisible(false);
+        lblIdLibro.setVisible(false);
+        lblIdAutor.setVisible(false);
+        lblIdEditorial.setVisible(false);
+        lblIdCategoria.setVisible(false);
     }
     
     private void CargarColumnasLibro(){
@@ -100,9 +107,9 @@ public class PanelLibros extends javax.swing.JPanel {
         jSeparator6 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        jSeparator14 = new javax.swing.JSeparator();
         btnBuscar = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
+        jSeparator14 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaLibros = new javax.swing.JTable();
         btnSave = new javax.swing.JPanel();
@@ -203,7 +210,6 @@ public class PanelLibros extends javax.swing.JPanel {
         txtBuscar.setForeground(new java.awt.Color(68, 68, 68));
         txtBuscar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 380, 30));
-        add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 650, 380, 10));
 
         btnBuscar.setBackground(new java.awt.Color(211, 85, 139));
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -242,6 +248,7 @@ public class PanelLibros extends javax.swing.JPanel {
         );
 
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 610, 160, 50));
+        add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 650, 380, 10));
 
         TablaLibros.setModel(modeloTablaLibros);
         TablaLibros.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -461,7 +468,27 @@ public class PanelLibros extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        
+        if (txtBuscar.getText()!="") {
+            LimpiarForm();
+            FunctionsBook funciones = new FunctionsBook();
+            FunctionsBook funcionesLibro = new FunctionsBook();
+            ArrayList<ClassBook> lista = funcionesLibro.SearchBook(txtBuscar.getText().trim());
+
+            int cantBooks =lista.size();
+            modeloTablaLibros.setNumRows(cantBooks);
+            for (int i = 0; i < cantBooks; i++) {
+                 ClassBook book = lista.get(i);
+                 modeloTablaLibros.setValueAt(book.getIdBook(), i, 0);
+                 modeloTablaLibros.setValueAt(book.getTitle(), i, 1);
+                 modeloTablaLibros.setValueAt(book.getVolume(), i, 2);
+                 modeloTablaLibros.setValueAt(book.getPages(), i, 3);
+                 modeloTablaLibros.setValueAt(book.getCopies(), i, 4);
+                 modeloTablaLibros.setValueAt(book.getRent_price(), i, 5);
+                 modeloTablaLibros.setValueAt(book.getId_author(), i, 6);
+                 modeloTablaLibros.setValueAt(book.getId_editorial(), i, 7);
+                 modeloTablaLibros.setValueAt(book.getId_category(), i, 8);
+            }
+        }
     }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
@@ -497,6 +524,16 @@ public class PanelLibros extends javax.swing.JPanel {
 
         lblEditandoLibro.setVisible(true);
         lblEditandoLibro.setText("Editando informacion de "+titulo);
+        
+        //Load info name
+        FunctionsAutor funcionesAutor = new FunctionsAutor();
+        txtNombreAutor.setText(funcionesAutor.getNameAuthor(autor));
+        
+        FunctionsEditorial funcionesEditorial = new FunctionsEditorial();
+        txtNombreEditorial.setText(funcionesEditorial.getNameEditorial(editorial));
+        
+        FunctionsCategory funcionesCategory = new FunctionsCategory();
+        txtNombreCategoria.setText(funcionesCategory.getNameCategory(categoria));        
     }//GEN-LAST:event_TablaLibrosMouseClicked
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked

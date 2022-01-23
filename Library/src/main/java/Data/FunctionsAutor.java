@@ -191,15 +191,15 @@ public class FunctionsAutor {
    }
     
     
-    public int getIdAuthor(String categoria){
-       int id=0;
-       try {
+    public String getNameAuthor(int id){
+       String nameAuthor="";
+        try {
           conn = DriverManager.getConnection(ruta,usuario,pass);
-          String sql = "select id_author from author where last_name ="+categoria;
+          String sql = "select CONCAT(first_name,' ',last_name) as name from author where id_author="+id;
           st = conn.prepareStatement(sql);
           rs = st.executeQuery();
           while (rs.next()) {               
-               id=rs.getInt("id_author");
+               nameAuthor=rs.getString("name");
            }
        } catch (Exception e) {
            System.out.println(e.toString());
@@ -213,6 +213,6 @@ public class FunctionsAutor {
                ex.printStackTrace();
            }
        }
-       return id;
+       return nameAuthor;
    }
 }

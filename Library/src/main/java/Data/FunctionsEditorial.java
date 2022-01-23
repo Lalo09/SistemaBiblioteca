@@ -192,15 +192,15 @@ public class FunctionsEditorial {
    }
     
     //Obtener el id de un editorial dado su nombre
-    public int getIdEditorial(String categoria){
-       int id=0;
+    public String getNameEditorial(int id){
+       String name = "";
        try {
           conn = DriverManager.getConnection(ruta,usuario,pass);
-          String sql = "select id_editorial from editorial where name ="+categoria;
+          String sql = "select name from editorial where id_editorial ="+id;
           st = conn.prepareStatement(sql);
           rs = st.executeQuery();
           while (rs.next()) {               
-               id=rs.getInt("id_editorial");
+               name=rs.getString("name");
            }
        } catch (Exception e) {
            System.out.println(e.toString());
@@ -214,6 +214,6 @@ public class FunctionsEditorial {
                ex.printStackTrace();
            }
        }
-       return id;
+       return name;
    }
 }
