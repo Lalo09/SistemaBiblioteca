@@ -4,9 +4,14 @@
  */
 package Views;
 
+import Data.FunctionsRent;
+import Logic.ClassRent;
+import Logic.ClassRentDetail;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +28,11 @@ public class PanelRenta extends javax.swing.JPanel {
      */
     public PanelRenta() {
         initComponents();
+        lblIdCliente.setVisible(false);
+        lblIdLibro.setVisible(false);
+        lblPrecioRentaLibro.setVisible(false);
+        lblIdRenta.setVisible(false);
+        lblIdUser.setVisible(false);
     }
 
     /**
@@ -232,8 +242,10 @@ public class PanelRenta extends javax.swing.JPanel {
         jLabel16.setText("Cliente");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
-        lblTotalRenta.setText("jLabel2");
-        jPanel1.add(lblTotalRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, -1, -1));
+        lblTotalRenta.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        lblTotalRenta.setForeground(new java.awt.Color(111, 0, 0));
+        lblTotalRenta.setText("0");
+        jPanel1.add(lblTotalRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 609, -1, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("/resources/remove.png")); // NOI18N
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -282,8 +294,8 @@ public class PanelRenta extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 398, 670, 180));
 
-        lblIdUser.setText("lblIdUser");
-        jPanel1.add(lblIdUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, -1, -1));
+        lblIdUser.setText("1");
+        jPanel1.add(lblIdUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -309,8 +321,43 @@ public class PanelRenta extends javax.swing.JPanel {
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        int id_rent = Integer.parseInt(lblIdRenta.getText());
+        double total = Double.parseDouble(lblTotalRenta.getText());
+        String fecha_actual =  dateFormat.format(jDateChooser1.getDate());
         String fecha_entrega =  dateFormat.format(jDateChooser1.getDate());
-        JOptionPane.showMessageDialog(this, fecha_entrega);
+        String status = "F";
+        int id_client = Integer.parseInt(lblIdCliente.getText());
+        int id_user = Integer.parseInt(lblIdUser.getText());
+        
+        ClassRent rent = new ClassRent(id_rent, total, fecha_actual, fecha_entrega, status, id_client, id_user,"");
+        FunctionsRent functionRent = new FunctionsRent();
+        
+        //Insert Rent
+        if (functionRent.SaveRent(rent)) {
+            //Get last rent
+            lblIdRenta.setText(""+functionRent.GetLastRent());
+            int rent_number = Integer.parseInt(lblIdRenta.getText());
+            
+            //Insert rent detail
+            DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                
+                int id_book = Integer.parseInt(model.getValueAt(i,0).toString());
+                double price = Double.parseDouble(model.getValueAt(i,2).toString());
+                
+                ClassRentDetail detail = new ClassRentDetail(0, id_book, price,rent_number);
+                functionRent.SaveDetailRent(detail);
+            }
+            
+            LimpiarForm();
+            
+            JOptionPane.showMessageDialog(this,"Renta guardada satisfactoriamente");
+            
+        }else{
+            JOptionPane.showMessageDialog(this,"No se ha podido realizar la renta correctamente, compruebe los datos ingresados");
+        }
+        
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
@@ -323,7 +370,7 @@ public class PanelRenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveMouseExited
 
     private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
-       
+       LimpiarForm();
     }//GEN-LAST:event_btnClearMouseClicked
 
     private void btnClearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseEntered
@@ -379,6 +426,21 @@ public class PanelRenta extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    
+    private void LimpiarForm(){
+        //jTable1.removeAll();
+        txtNombreCliente.setText("");
+        txtNombreLibro.setText("");
+        lblIdRenta.setText(""+0);
+        lblTotalRenta.setText(""+0);
+        lblIdCliente.setText(""+0);
+        lblIdLibro.setText(""+0);
+        lblPrecioRentaLibro.setText(""+0);
+        PanelForaneo.removeAll();
+        
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        model.setRowCount(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelForaneo;

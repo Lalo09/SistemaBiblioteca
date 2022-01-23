@@ -281,7 +281,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLibrosMouseExited
 
     private void btnDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionMouseClicked
-        // TODO add your handling code here:
+        PanelDevoluciones pDevolucion = new PanelDevoluciones ();
+        pDevolucion.setSize(850, 670);
+        pDevolucion.setLocation(0, 0);
+        
+        contenedor.removeAll();
+        contenedor.add(pDevolucion, BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
     }//GEN-LAST:event_btnDevolucionMouseClicked
 
     private void btnDevolucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDevolucionMouseEntered

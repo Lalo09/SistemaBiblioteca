@@ -224,6 +224,24 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         txtUsuarioPassword = new javax.swing.JTextField();
         jSeparator11 = new javax.swing.JSeparator();
+        PanelUsuarios3 = new javax.swing.JPanel();
+        lblTitulo4 = new javax.swing.JLabel();
+        lblRenta = new javax.swing.JLabel();
+        PanelForaneo = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        txtNombreCliente = new javax.swing.JTextField();
+        jSeparator12 = new javax.swing.JSeparator();
+        lblAbrirPanelCliente = new javax.swing.JLabel();
+        lblIdCliente = new javax.swing.JLabel();
+        btnDetallesRenta = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TablaLibros = new javax.swing.JTable();
+        btnReimprimir = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnLimpiar = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(254, 254, 254));
         setPreferredSize(new java.awt.Dimension(890, 670));
@@ -915,6 +933,191 @@ public class PanelMantenimientos extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Usuarios", PanelUsuarios2);
 
+        PanelUsuarios3.setBackground(new java.awt.Color(244, 244, 244));
+        PanelUsuarios3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo4.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        lblTitulo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo4.setText("Reimprimir Renta");
+        PanelUsuarios3.add(lblTitulo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
+
+        lblRenta.setText("0");
+        PanelUsuarios3.add(lblRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
+
+        javax.swing.GroupLayout PanelForaneoLayout = new javax.swing.GroupLayout(PanelForaneo);
+        PanelForaneo.setLayout(PanelForaneoLayout);
+        PanelForaneoLayout.setHorizontalGroup(
+            PanelForaneoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 410, Short.MAX_VALUE)
+        );
+        PanelForaneoLayout.setVerticalGroup(
+            PanelForaneoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+
+        PanelUsuarios3.add(PanelForaneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 410, 290));
+
+        jLabel27.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(66, 62, 62));
+        jLabel27.setText("Cliente");
+        PanelUsuarios3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        txtNombreCliente.setEditable(false);
+        txtNombreCliente.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtNombreCliente.setForeground(new java.awt.Color(68, 68, 68));
+        txtNombreCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        PanelUsuarios3.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 270, 30));
+        PanelUsuarios3.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 270, 10));
+
+        lblAbrirPanelCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAbrirPanelCliente.setIcon(new javax.swing.ImageIcon("/resources/plus.png")); // NOI18N
+        lblAbrirPanelCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAbrirPanelCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAbrirPanelClienteMouseClicked(evt);
+            }
+        });
+        PanelUsuarios3.add(lblAbrirPanelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, 50));
+
+        lblIdCliente.setText("0");
+        PanelUsuarios3.add(lblIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
+
+        btnDetallesRenta.setBackground(new java.awt.Color(151, 151, 151));
+        btnDetallesRenta.setForeground(new java.awt.Color(254, 254, 254));
+        btnDetallesRenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetallesRenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDetallesRentaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetallesRentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetallesRentaMouseExited(evt);
+            }
+        });
+
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel2.setText("Ver detalles de devolucion");
+
+        javax.swing.GroupLayout btnDetallesRentaLayout = new javax.swing.GroupLayout(btnDetallesRenta);
+        btnDetallesRenta.setLayout(btnDetallesRentaLayout);
+        btnDetallesRentaLayout.setHorizontalGroup(
+            btnDetallesRentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnDetallesRentaLayout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(30, 30, 30))
+        );
+        btnDetallesRentaLayout.setVerticalGroup(
+            btnDetallesRentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        PanelUsuarios3.add(btnDetallesRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 250, 30));
+
+        jLabel28.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(66, 62, 62));
+        jLabel28.setText("Libros de la devolucion");
+        PanelUsuarios3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+
+        TablaLibros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Titulo del libro"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(TablaLibros);
+
+        PanelUsuarios3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 320, 140));
+
+        btnReimprimir.setBackground(new java.awt.Color(85, 211, 128));
+        btnReimprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReimprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReimprimirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReimprimirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReimprimirMouseExited(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel1.setText("Guardar devolucion");
+
+        javax.swing.GroupLayout btnReimprimirLayout = new javax.swing.GroupLayout(btnReimprimir);
+        btnReimprimir.setLayout(btnReimprimirLayout);
+        btnReimprimirLayout.setHorizontalGroup(
+            btnReimprimirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReimprimirLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37))
+        );
+        btnReimprimirLayout.setVerticalGroup(
+            btnReimprimirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnReimprimirLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        PanelUsuarios3.add(btnReimprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 180, 50));
+
+        btnLimpiar.setBackground(new java.awt.Color(151, 151, 151));
+        btnLimpiar.setForeground(new java.awt.Color(254, 254, 254));
+        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseExited(evt);
+            }
+        });
+
+        jLabel29.setBackground(new java.awt.Color(151, 151, 151));
+        jLabel29.setForeground(new java.awt.Color(151, 151, 151));
+        jLabel29.setIcon(new javax.swing.ImageIcon("/resources/clean.png")); // NOI18N
+
+        javax.swing.GroupLayout btnLimpiarLayout = new javax.swing.GroupLayout(btnLimpiar);
+        btnLimpiar.setLayout(btnLimpiarLayout);
+        btnLimpiarLayout.setHorizontalGroup(
+            btnLimpiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnLimpiarLayout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jLabel29)
+                .addGap(32, 32, 32))
+        );
+        btnLimpiarLayout.setVerticalGroup(
+            btnLimpiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnLimpiarLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
+        );
+
+        PanelUsuarios3.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 100, 50));
+
+        jTabbedPane1.addTab("Reimprimir", PanelUsuarios3);
+
         add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 660));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1252,6 +1455,46 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarUserMouseExited
 
+    private void lblAbrirPanelClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbrirPanelClienteMouseClicked
+
+    }//GEN-LAST:event_lblAbrirPanelClienteMouseClicked
+
+    private void btnDetallesRentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesRentaMouseClicked
+
+    }//GEN-LAST:event_btnDetallesRentaMouseClicked
+
+    private void btnDetallesRentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesRentaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetallesRentaMouseEntered
+
+    private void btnDetallesRentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesRentaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetallesRentaMouseExited
+
+    private void btnReimprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirMouseClicked
+
+    }//GEN-LAST:event_btnReimprimirMouseClicked
+
+    private void btnReimprimirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirMouseEntered
+
+    }//GEN-LAST:event_btnReimprimirMouseEntered
+
+    private void btnReimprimirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirMouseExited
+
+    }//GEN-LAST:event_btnReimprimirMouseExited
+
+    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarMouseClicked
+
+    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarMouseEntered
+
+    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarMouseExited
+
     //Funciones propias
     private void limpiarFormCategoria(){
         modeloTablaCategoria.setRowCount(0);
@@ -1297,25 +1540,32 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelEditorial;
+    private javax.swing.JPanel PanelForaneo;
     private javax.swing.JPanel PanelUsuarios;
     private javax.swing.JPanel PanelUsuarios1;
     private javax.swing.JPanel PanelUsuarios2;
+    private javax.swing.JPanel PanelUsuarios3;
     private javax.swing.JTable TablaAutores;
     private javax.swing.JTable TablaCategorias;
     private javax.swing.JTable TablaEditorial;
+    private javax.swing.JTable TablaLibros;
     private javax.swing.JTable TablaUsuarios;
     private javax.swing.JPanel btnDeleteAutor;
     private javax.swing.JPanel btnDeleteCategoria;
     private javax.swing.JPanel btnDeleteUser;
+    private javax.swing.JPanel btnDetallesRenta;
+    private javax.swing.JPanel btnLimpiar;
     private javax.swing.JPanel btnLimpiarAutor;
     private javax.swing.JPanel btnLimpiarCategoria;
     private javax.swing.JPanel btnLimpiarEditorial;
     private javax.swing.JPanel btnLimpiarUser;
+    private javax.swing.JPanel btnReimprimir;
     private javax.swing.JPanel btnSaveAutor;
     private javax.swing.JPanel btnSaveCategoria;
     private javax.swing.JPanel btnSaveEditorial;
     private javax.swing.JPanel btnSaveUser;
     private javax.swing.JPanel btneliminarCategoria;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1326,6 +1576,7 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1333,6 +1584,9 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1342,8 +1596,10 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1353,18 +1609,22 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblAbrirPanelCliente;
     private javax.swing.JLabel lblEditandoAutor;
     private javax.swing.JLabel lblEditandoCategoria;
     private javax.swing.JLabel lblEditandoEditorial;
     private javax.swing.JLabel lblEditandoUser;
     private javax.swing.JLabel lblIdAutor;
     private javax.swing.JLabel lblIdCategorias;
+    public static javax.swing.JLabel lblIdCliente;
     private javax.swing.JLabel lblIdEditorial;
     private javax.swing.JLabel lblIdUser;
+    private javax.swing.JLabel lblRenta;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblTitulo2;
     private javax.swing.JLabel lblTitulo3;
+    private javax.swing.JLabel lblTitulo4;
     private javax.swing.JTextField txtApellidoUsuario;
     private javax.swing.JTextField txtDescriptionAutor;
     private javax.swing.JTextField txtDescriptionCategoria;
@@ -1373,6 +1633,7 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JTextField txtNameAutor;
     private javax.swing.JTextField txtNameCategoria;
     private javax.swing.JTextField txtNameEditorial;
+    public static javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreUsuario;
     private javax.swing.JTextField txtUsuarioPassword;
     // End of variables declaration//GEN-END:variables
