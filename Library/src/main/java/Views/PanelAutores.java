@@ -156,7 +156,9 @@ public class PanelAutores extends javax.swing.JPanel {
         
         //test
         //JOptionPane.showMessageDialog(this, id+" y "+name);
-        PanelLibros.idAutor = id;
+        //PanelLibros.idAutor = id;
+        PanelLibros.lblIdAutor.setText(""+id);
+        PanelLibros.txtNombreAutor.setText(name);
     }//GEN-LAST:event_TablaAutoresMouseClicked
 
 

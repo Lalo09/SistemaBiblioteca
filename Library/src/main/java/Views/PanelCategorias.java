@@ -7,6 +7,7 @@ import Logic.ClassCategory;
 import Data.FunctionsCategory;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author eduardo
@@ -77,6 +78,11 @@ public class PanelCategorias extends javax.swing.JPanel {
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 260, 10));
 
         TablaCategorias.setModel(modeloTablaCategoria);
+        TablaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCategoriasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TablaCategorias);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 350, 130));
@@ -133,6 +139,19 @@ public class PanelCategorias extends javax.swing.JPanel {
     private void btnBuscarAutorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAutorMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarAutorMouseExited
+
+    private void TablaCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCategoriasMouseClicked
+        int index = TablaCategorias.getSelectedRow();
+        TableModel model = TablaCategorias.getModel();
+        int id = Integer.parseInt(model.getValueAt(index,0).toString());
+        String name = model.getValueAt(index,1).toString();
+        
+        //test
+        //JOptionPane.showMessageDialog(this, id+" y "+name);
+        //PanelLibros.idAutor = id;
+        PanelLibros.lblIdCategoria.setText(""+id);
+        PanelLibros.txtNombreCategoria.setText(name);
+    }//GEN-LAST:event_TablaCategoriasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

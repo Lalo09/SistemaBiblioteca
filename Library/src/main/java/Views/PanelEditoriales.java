@@ -7,6 +7,7 @@ import Logic.ClassEditorial;
 import Data.FunctionsEditorial;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -78,6 +79,11 @@ public class PanelEditoriales extends javax.swing.JPanel {
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 260, 10));
 
         TablaEditoras.setModel(modeloTablaEditorial);
+        TablaEditoras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaEditorasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TablaEditoras);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 350, 130));
@@ -134,6 +140,19 @@ public class PanelEditoriales extends javax.swing.JPanel {
     private void btnBuscarAutorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAutorMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarAutorMouseExited
+
+    private void TablaEditorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaEditorasMouseClicked
+        int index = TablaEditoras.getSelectedRow();
+        TableModel model = TablaEditoras.getModel();
+        int id = Integer.parseInt(model.getValueAt(index,0).toString());
+        String name = model.getValueAt(index,1).toString();
+        
+        //test
+        //JOptionPane.showMessageDialog(this, id+" y "+name);
+        //PanelLibros.idAutor = id;
+        PanelLibros.lblIdEditorial.setText(""+id);
+        PanelLibros.txtNombreEditorial.setText(name);
+    }//GEN-LAST:event_TablaEditorasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

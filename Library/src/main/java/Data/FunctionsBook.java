@@ -55,9 +55,11 @@ public class FunctionsBook {
 
     public boolean UpdateBook(ClassBook book){
        try {
+           System.out.println("Metodo actualizado"+book);
             conn = DriverManager.getConnection(ruta,usuario,pass);
-            String sql = "UPDATE book SET title=? ,volume=?, pages=?, copies=?, rent_price=?, id_author=?, id_editorial=?, id_category=? "
+            String sql = "UPDATE book SET title=?, volume=?, pages=?, copies=?, rent_price=?, id_author=?, id_editorial=?, id_category=? "
                    +"WHERE id_book=?";
+            //System.out.println(sql);
             st = conn.prepareStatement(sql);
             st.setString(1,book.getTitle());
             st.setString(2,book.getVolume());
@@ -118,7 +120,7 @@ public class FunctionsBook {
            st = conn.prepareStatement("select * from book");
            rs = st.executeQuery();
            while (rs.next()) {               
-               int id_client=rs.getInt("id_book");
+               int id_book=rs.getInt("id_book");
                String title=rs.getString("title");
                String volume=rs.getString("volume");
                int pages=rs.getInt("pages");
@@ -128,7 +130,7 @@ public class FunctionsBook {
                int id_editorial=rs.getInt("id_editorial");
                int id_category=rs.getInt("id_category");
                
-               ClassBook book = new ClassBook(id_author, title, volume, pages, copies, price_rent, id_author, id_editorial, id_category);
+               ClassBook book = new ClassBook(id_book, title, volume, pages, copies, price_rent, id_author, id_editorial, id_category);
                lista.add(book);
                //System.err.println(client.toString()+"/n");
            }
@@ -156,7 +158,7 @@ public class FunctionsBook {
            st = conn.prepareStatement("select  * from book where  title like '%"+search+"%'");
            rs = st.executeQuery();
            while (rs.next()) {               
-               int id_client=rs.getInt("id_book");
+               int id_book=rs.getInt("id_book");
                String title=rs.getString("title");
                String volume=rs.getString("volume");
                int pages=rs.getInt("pages");
@@ -166,7 +168,7 @@ public class FunctionsBook {
                int id_editorial=rs.getInt("id_editorial");
                int id_category=rs.getInt("id_category");
                
-               ClassBook book = new ClassBook(id_author, title, volume, pages, copies, price_rent, id_author, id_editorial, id_category);
+               ClassBook book = new ClassBook(id_book, title, volume, pages, copies, price_rent, id_author, id_editorial, id_category);
                lista.add(book);
            }
            conn.close();

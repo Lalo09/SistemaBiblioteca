@@ -19,6 +19,11 @@ public class ClassBook {
     public int id_author;
     public int id_editorial;
     public int id_category;
+
+    @Override
+    public String toString() {
+        return "ClassBook{" + "idBook=" + idBook + ", title=" + title + ", volume=" + volume + ", pages=" + pages + ", copies=" + copies + ", rent_price=" + rent_price + ", id_author=" + id_author + ", id_editorial=" + id_editorial + ", id_category=" + id_category + '}';
+    }
     
     public ClassBook(int idBook, String title, String volume, int pages, int copies, double rent_price, int id_author, int id_editorial, int id_category) {
         this.idBook = idBook;
