@@ -339,7 +339,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenimientosMouseExited
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
-        // TODO add your handling code here:
+        PanelReportes pReportes = new PanelReportes();
+        pReportes.setSize(850, 670);
+        pReportes.setLocation(0, 0);
+        
+        contenedor.removeAll();
+        contenedor.add(pReportes, BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
     }//GEN-LAST:event_btnReportesMouseClicked
 
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
