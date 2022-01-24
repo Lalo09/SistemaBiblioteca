@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Data;
+import Logic.ClassBook;
 import Logic.ClassClient;
 import Logic.ClassRent;
 import Logic.ClassRentDetail;
@@ -80,25 +81,15 @@ public class FunctionsRent {
        }
     }
     
-    public boolean UpdateStatusRent(ClassClient client){
+    public boolean UpdateStatusRent(String note, int id){
        try {
             conn = DriverManager.getConnection(ruta,usuario,pass);
-            String sql = "UPDATE client SET name=?, last_name=?, email=?, phone=?, age=?, street=?, num_int=?, num_ext=?, city=?, state=?, country=? "
-                   +"WHERE id_client = ?";
+            String sql = "UPDATE rent SET status='T',notes=?"
+                   +"WHERE id_rent=?";
             //System.out.print(sql);
             st = conn.prepareStatement(sql);
-            st.setString(1,client.getName());
-            st.setString(2,client.getLast_name());
-            st.setString(3,client.getEmail());
-            st.setString(4,client.getPhone());
-            st.setInt(5,client.getAge());
-            st.setString(6,client.getStreet());
-            st.setString(7,client.getNum_int());
-            st.setString(8,client.getNum_ext());
-            st.setString(9,client.getCity());
-            st.setString(10,client.getState());
-            st.setString(11,client.getState());
-            st.setInt(12,client.getId());
+            st.setString(1,note);
+            st.setInt(2,id);
             st.executeUpdate();
             return true;
        } catch (Exception e) {
@@ -142,31 +133,14 @@ public class FunctionsRent {
        return id_rent;
    }
     
-    public ArrayList<ClassClient> GetLastRentByUser(){
-       ArrayList<ClassClient> lista = new ArrayList<ClassClient>();
-       
+    public int GetLastRentByUser(int id){
+       int idRenta = 0;
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from client");
+           st = conn.prepareStatement("select id_rent from rent r where id_client = (select id_client from client where id_client = "+id+") order by id_rent DESC limit 1 ");
            rs = st.executeQuery();
            while (rs.next()) {               
-               int id_client=rs.getInt("id_client");
-               String name=rs.getString("name");
-               String last_name=rs.getString("last_name");
-               String email=rs.getString("email");
-               String phone=rs.getString("phone");
-               int age = rs.getInt("age");
-               String created_at=rs.getString("created_at");
-               String street=rs.getString("street");
-               String num_int=rs.getString("num_int");
-               String num_ext=rs.getString("num_ext");
-               String city=rs.getString("city");
-               String state=rs.getString("state");
-               String country=rs.getString("country");
-               
-               ClassClient client = new ClassClient(id_client, name, last_name, email, phone, age, created_at, street, num_int, num_ext, city, state, country);
-               lista.add(client);
-               //System.err.println(client.toString()+"/n");
+               idRenta=rs.getInt("id_rent");               
            }
            conn.close();
        } catch (Exception e) {
@@ -181,33 +155,19 @@ public class FunctionsRent {
                ex.printStackTrace();
            }
        }
-       return lista;
+       return idRenta;
    }
     
-    public ArrayList<ClassClient> DetailRent(){
-       ArrayList<ClassClient> lista = new ArrayList<ClassClient>();
+    public ArrayList<String> DetailRent(int id){
+       ArrayList<String> lista = new ArrayList<String>();
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from client");
+           st = conn.prepareStatement("select title from rent_detail inner join book on rent_detail.id_book = book.id_book where id_rent ="+id);
            rs = st.executeQuery();
            while (rs.next()) {               
-               int id_client=rs.getInt("id_client");
-               String name=rs.getString("name");
-               String last_name=rs.getString("last_name");
-               String email=rs.getString("email");
-               String phone=rs.getString("phone");
-               int age = rs.getInt("age");
-               String created_at=rs.getString("created_at");
-               String street=rs.getString("street");
-               String num_int=rs.getString("num_int");
-               String num_ext=rs.getString("num_ext");
-               String city=rs.getString("city");
-               String state=rs.getString("state");
-               String country=rs.getString("country");
-               
-               ClassClient client = new ClassClient(id_client, name, last_name, email, phone, age, created_at, street, num_int, num_ext, city, state, country);
-               lista.add(client);
+               String title=rs.getString("title");
+               lista.add(title);
                //System.err.println(client.toString()+"/n");
            }
            conn.close();

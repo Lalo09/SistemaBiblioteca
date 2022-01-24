@@ -4,17 +4,29 @@
  */
 package Views;
 
+import java.awt.BorderLayout;
+import Data.FunctionsRent;
+import Logic.ClassBook;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author eduardo
  */
 public class PanelDevoluciones extends javax.swing.JPanel {
 
+    DefaultTableModel modeloTablaLibros = new DefaultTableModel();
     /**
      * Creates new form PanelDevoluciones
      */
     public PanelDevoluciones() {
         initComponents();
+        lblIdClienteDev.setText(""+0);
+        txtNombreClienteDev.setText("");
+        lblIdClienteDev.setVisible(false);
+        lblIdRenta.setVisible(false);
     }
 
     /**
@@ -38,15 +50,15 @@ public class PanelDevoluciones extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaLibros = new javax.swing.JTable();
-        txtNombreCliente = new javax.swing.JTextField();
+        txtNombreClienteDev = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        lblIdCliente = new javax.swing.JLabel();
+        lblIdClienteDev = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtComentarios = new javax.swing.JTextArea();
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
         jPanel1.setPreferredSize(new java.awt.Dimension(890, 670));
@@ -159,31 +171,16 @@ public class PanelDevoluciones extends javax.swing.JPanel {
         jLabel16.setText("Libros de la devolucion");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
-        TablaLibros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Titulo del libro"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        TablaLibros.setModel(modeloTablaLibros);
         jScrollPane2.setViewportView(TablaLibros);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 320, 140));
 
-        txtNombreCliente.setEditable(false);
-        txtNombreCliente.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtNombreCliente.setForeground(new java.awt.Color(68, 68, 68));
-        txtNombreCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 270, 30));
+        txtNombreClienteDev.setEditable(false);
+        txtNombreClienteDev.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtNombreClienteDev.setForeground(new java.awt.Color(68, 68, 68));
+        txtNombreClienteDev.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(txtNombreClienteDev, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 270, 30));
         jPanel1.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 270, 10));
 
         jLabel17.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -194,10 +191,10 @@ public class PanelDevoluciones extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(66, 62, 62));
         jLabel18.setText("Cliente");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 102, -1, 40));
 
-        lblIdCliente.setText("0");
-        jPanel1.add(lblIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
+        lblIdClienteDev.setText("0");
+        jPanel1.add(lblIdClienteDev, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
 
         btnLimpiar.setBackground(new java.awt.Color(151, 151, 151));
         btnLimpiar.setForeground(new java.awt.Color(254, 254, 254));
@@ -237,9 +234,9 @@ public class PanelDevoluciones extends javax.swing.JPanel {
 
         jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 580, 100, 50));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtComentarios.setColumns(20);
+        txtComentarios.setRows(5);
+        jScrollPane1.setViewportView(txtComentarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 320, -1));
 
@@ -266,7 +263,16 @@ public class PanelDevoluciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarDevolucionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarDevolucionMouseClicked
-        
+        //Actualizar estado
+        FunctionsRent funcRent = new FunctionsRent();
+        String note = txtComentarios.getText().trim();
+        int idRenta = Integer.parseInt(lblIdRenta.getText());
+        if (funcRent.UpdateStatusRent(note, idRenta)) {
+            JOptionPane.showMessageDialog(this,"Devolucion registrada correctamente");
+            Limpiar();
+        }else{
+            JOptionPane.showMessageDialog(this,"Error al registrar la devolucion");
+        }
     }//GEN-LAST:event_btnGuardarDevolucionMouseClicked
 
     private void btnGuardarDevolucionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarDevolucionMouseEntered
@@ -278,7 +284,20 @@ public class PanelDevoluciones extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGuardarDevolucionMouseExited
 
     private void btnDetallesLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesLibroMouseClicked
-      
+        modeloTablaLibros.setNumRows(0);
+        modeloTablaLibros.setNumRows(0);
+        FunctionsRent function = new FunctionsRent();
+        int idUltimaRenta = function.GetLastRentByUser(Integer.parseInt(lblIdClienteDev.getText()));
+        lblIdRenta.setText(""+idUltimaRenta);
+        modeloTablaLibros.addColumn("Libros");
+        
+        ArrayList<String> lista = function.DetailRent(idUltimaRenta);
+        int cantLibros =lista.size();
+        modeloTablaLibros.setNumRows(cantLibros);
+        for (int i = 0; i < cantLibros; i++) {
+            String titulo = lista.get(i);
+            modeloTablaLibros.setValueAt(titulo, i, 0);
+        }
     }//GEN-LAST:event_btnDetallesLibroMouseClicked
 
     private void btnDetallesLibroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesLibroMouseEntered
@@ -290,11 +309,18 @@ public class PanelDevoluciones extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDetallesLibroMouseExited
 
     private void lblAbrirPanelEditorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbrirPanelEditorialMouseClicked
+        PanelClienteDevolucion pcliente = new PanelClienteDevolucion();
+        pcliente.setSize(850, 670);
+        pcliente.setLocation(0, 0);
         
+        PanelForaneo.removeAll();
+        PanelForaneo.add(pcliente, BorderLayout.CENTER);
+        PanelForaneo.revalidate();
+        PanelForaneo.repaint();
     }//GEN-LAST:event_lblAbrirPanelEditorialMouseClicked
 
     private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
-        // TODO add your handling code here:
+        Limpiar();
     }//GEN-LAST:event_btnLimpiarMouseClicked
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
@@ -305,6 +331,15 @@ public class PanelDevoluciones extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarMouseExited
 
+    
+    private void Limpiar(){
+        lblIdRenta.setText(""+0);
+        lblIdClienteDev.setText(""+0);
+        txtNombreClienteDev.setText("");
+        modeloTablaLibros.setNumRows(0);
+        modeloTablaLibros.setNumRows(0);
+        txtComentarios.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelForaneo;
@@ -322,11 +357,11 @@ public class PanelDevoluciones extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblAbrirPanelEditorial;
-    public static javax.swing.JLabel lblIdCliente;
+    public static javax.swing.JLabel lblIdClienteDev;
     public static javax.swing.JLabel lblIdRenta;
     private javax.swing.JLabel lblTitulo;
-    public static javax.swing.JTextField txtNombreCliente;
+    private javax.swing.JTextArea txtComentarios;
+    public static javax.swing.JTextField txtNombreClienteDev;
     // End of variables declaration//GEN-END:variables
 }

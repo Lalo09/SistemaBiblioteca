@@ -14,13 +14,13 @@ import javax.swing.table.TableModel;
  *
  * @author eduardo
  */
-public class PanelClienteRenta extends javax.swing.JPanel {
+public class PanelClienteDevolucion extends javax.swing.JPanel {
 
     DefaultTableModel modeloTablaCliente = new DefaultTableModel();
     /**
      * Creates new form PanelClienteRenta
      */
-    public PanelClienteRenta() {
+    public PanelClienteDevolucion() {
         initComponents();
         CargarColumnasCliente();
     }
@@ -148,11 +148,11 @@ public class PanelClienteRenta extends javax.swing.JPanel {
         //test
         //JOptionPane.showMessageDialog(this, id+" y "+name);
         //PanelLibros.idAutor = id;
-        PanelRenta.lblIdCliente.setText(""+id);
-        PanelRenta.txtNombreCliente.setText(name);
-        /*
+        /*PanelRenta.lblIdCliente.setText(""+id);
+        PanelRenta.txtNombreCliente.setText(name);*/
+        
         PanelDevoluciones.lblIdClienteDev.setText(""+id);
-        PanelDevoluciones.txtNombreClienteDev.setText(name);*/
+        PanelDevoluciones.txtNombreClienteDev.setText(name);
     }//GEN-LAST:event_TablaLibrosMouseClicked
 
     private void btnBuscarAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAutorMouseClicked

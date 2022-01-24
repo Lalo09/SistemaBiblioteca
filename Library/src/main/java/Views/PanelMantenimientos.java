@@ -12,7 +12,11 @@ import Logic.ClassUser;
 import Data.FunctionsCategory;
 import Data.FunctionsEditorial;
 import Data.FunctionsAutor;
+import Data.FunctionsClient;
+import Data.FunctionsRent;
 import Data.FunctionsUser;
+import Logic.ClassClient;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -38,7 +42,9 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     DefaultTableModel modeloTablaCategoria = new DefaultTableModel();
     DefaultTableModel modeloTablaEditorial = new DefaultTableModel();
     DefaultTableModel modeloTablaAuthor = new DefaultTableModel();
-    DefaultTableModel modeloTablaUser = new DefaultTableModel();    
+    DefaultTableModel modeloTablaUser = new DefaultTableModel();  
+    DefaultTableModel modeloTablaCliente = new DefaultTableModel();
+    DefaultTableModel modeloTablaLibrosDetalle = new DefaultTableModel();
     /**
      * Creates new form PanelClientes
      */
@@ -224,15 +230,14 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         txtUsuarioPassword = new javax.swing.JTextField();
         jSeparator11 = new javax.swing.JSeparator();
-        PanelUsuarios3 = new javax.swing.JPanel();
+        PanelReimprimir = new javax.swing.JPanel();
         lblTitulo4 = new javax.swing.JLabel();
-        lblRenta = new javax.swing.JLabel();
-        PanelForaneo = new javax.swing.JPanel();
+        lblIdRentaReimprimir = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         txtNombreCliente = new javax.swing.JTextField();
         jSeparator12 = new javax.swing.JSeparator();
         lblAbrirPanelCliente = new javax.swing.JLabel();
-        lblIdCliente = new javax.swing.JLabel();
+        lblIdClienteReimprimir = new javax.swing.JLabel();
         btnDetallesRenta = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -242,6 +247,13 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        TablaClientes = new javax.swing.JTable();
+        jLabel31 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        jSeparator13 = new javax.swing.JSeparator();
+        btnBuscarAutor = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(254, 254, 254));
         setPreferredSize(new java.awt.Dimension(890, 670));
@@ -933,41 +945,28 @@ public class PanelMantenimientos extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Usuarios", PanelUsuarios2);
 
-        PanelUsuarios3.setBackground(new java.awt.Color(244, 244, 244));
-        PanelUsuarios3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelReimprimir.setBackground(new java.awt.Color(244, 244, 244));
+        PanelReimprimir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo4.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitulo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo4.setText("Reimprimir Renta");
-        PanelUsuarios3.add(lblTitulo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
+        PanelReimprimir.add(lblTitulo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
 
-        lblRenta.setText("0");
-        PanelUsuarios3.add(lblRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
-
-        javax.swing.GroupLayout PanelForaneoLayout = new javax.swing.GroupLayout(PanelForaneo);
-        PanelForaneo.setLayout(PanelForaneoLayout);
-        PanelForaneoLayout.setHorizontalGroup(
-            PanelForaneoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
-        );
-        PanelForaneoLayout.setVerticalGroup(
-            PanelForaneoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
-        );
-
-        PanelUsuarios3.add(PanelForaneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 410, 290));
+        lblIdRentaReimprimir.setText("0");
+        PanelReimprimir.add(lblIdRentaReimprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(66, 62, 62));
         jLabel27.setText("Cliente");
-        PanelUsuarios3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        PanelReimprimir.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         txtNombreCliente.setEditable(false);
         txtNombreCliente.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         txtNombreCliente.setForeground(new java.awt.Color(68, 68, 68));
         txtNombreCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        PanelUsuarios3.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 270, 30));
-        PanelUsuarios3.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 270, 10));
+        PanelReimprimir.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 270, 30));
+        PanelReimprimir.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 270, 10));
 
         lblAbrirPanelCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAbrirPanelCliente.setIcon(new javax.swing.ImageIcon("/resources/plus.png")); // NOI18N
@@ -977,10 +976,10 @@ public class PanelMantenimientos extends javax.swing.JPanel {
                 lblAbrirPanelClienteMouseClicked(evt);
             }
         });
-        PanelUsuarios3.add(lblAbrirPanelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, 50));
+        PanelReimprimir.add(lblAbrirPanelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, 50));
 
-        lblIdCliente.setText("0");
-        PanelUsuarios3.add(lblIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
+        lblIdClienteReimprimir.setText("0");
+        PanelReimprimir.add(lblIdClienteReimprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
 
         btnDetallesRenta.setBackground(new java.awt.Color(151, 151, 151));
         btnDetallesRenta.setForeground(new java.awt.Color(254, 254, 254));
@@ -1014,32 +1013,17 @@ public class PanelMantenimientos extends javax.swing.JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        PanelUsuarios3.add(btnDetallesRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 250, 30));
+        PanelReimprimir.add(btnDetallesRenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 250, 30));
 
         jLabel28.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(66, 62, 62));
         jLabel28.setText("Libros de la devolucion");
-        PanelUsuarios3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        PanelReimprimir.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
-        TablaLibros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Titulo del libro"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        TablaLibros.setModel(modeloTablaLibrosDetalle);
         jScrollPane5.setViewportView(TablaLibros);
 
-        PanelUsuarios3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 320, 140));
+        PanelReimprimir.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 320, 140));
 
         btnReimprimir.setBackground(new java.awt.Color(85, 211, 128));
         btnReimprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1057,16 +1041,16 @@ public class PanelMantenimientos extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel1.setText("Guardar devolucion");
+        jLabel1.setText("Reimprimir");
 
         javax.swing.GroupLayout btnReimprimirLayout = new javax.swing.GroupLayout(btnReimprimir);
         btnReimprimir.setLayout(btnReimprimirLayout);
         btnReimprimirLayout.setHorizontalGroup(
             btnReimprimirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReimprimirLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(btnReimprimirLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         btnReimprimirLayout.setVerticalGroup(
             btnReimprimirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1076,7 +1060,7 @@ public class PanelMantenimientos extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        PanelUsuarios3.add(btnReimprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 180, 50));
+        PanelReimprimir.add(btnReimprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 180, 50));
 
         btnLimpiar.setBackground(new java.awt.Color(151, 151, 151));
         btnLimpiar.setForeground(new java.awt.Color(254, 254, 254));
@@ -1114,9 +1098,65 @@ public class PanelMantenimientos extends javax.swing.JPanel {
                 .addGap(15, 15, 15))
         );
 
-        PanelUsuarios3.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 100, 50));
+        PanelReimprimir.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 100, 50));
 
-        jTabbedPane1.addTab("Reimprimir", PanelUsuarios3);
+        TablaClientes.setModel(modeloTablaCliente);
+        TablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaClientesMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(TablaClientes);
+
+        PanelReimprimir.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 350, 120));
+
+        jLabel31.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(66, 62, 62));
+        jLabel31.setText("Buscar");
+        PanelReimprimir.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 170, -1));
+
+        txtBuscar.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtBuscar.setForeground(new java.awt.Color(68, 68, 68));
+        txtBuscar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        PanelReimprimir.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 260, 30));
+        PanelReimprimir.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 260, 10));
+
+        btnBuscarAutor.setBackground(new java.awt.Color(151, 151, 151));
+        btnBuscarAutor.setForeground(new java.awt.Color(254, 254, 254));
+        btnBuscarAutor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarAutor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarAutorMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarAutorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarAutorMouseExited(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel3.setText("Ver");
+
+        javax.swing.GroupLayout btnBuscarAutorLayout = new javax.swing.GroupLayout(btnBuscarAutor);
+        btnBuscarAutor.setLayout(btnBuscarAutorLayout);
+        btnBuscarAutorLayout.setHorizontalGroup(
+            btnBuscarAutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnBuscarAutorLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        btnBuscarAutorLayout.setVerticalGroup(
+            btnBuscarAutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        PanelReimprimir.add(btnBuscarAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, 80, 40));
+
+        jTabbedPane1.addTab("Reimprimir", PanelReimprimir);
 
         add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 660));
     }// </editor-fold>//GEN-END:initComponents
@@ -1456,11 +1496,41 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLimpiarUserMouseExited
 
     private void lblAbrirPanelClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbrirPanelClienteMouseClicked
-
+       modeloTablaCliente.setNumRows(0);
+       modeloTablaCliente.setColumnCount(0);
+       modeloTablaCliente.addColumn("id");
+       modeloTablaCliente.addColumn("Nombre");
+       modeloTablaCliente.addColumn("Apellidos");
+       
+       FunctionsClient funcionesCliente = new FunctionsClient();
+       ArrayList<ClassClient> lista = funcionesCliente.ShowClients();
+       
+       int cantCliente =lista.size();
+       modeloTablaCliente.setNumRows(cantCliente);
+       for (int i = 0; i < cantCliente; i++) {
+            ClassClient cliente = lista.get(i);
+            modeloTablaCliente.setValueAt(cliente.getId(), i, 0);
+            modeloTablaCliente.setValueAt(cliente.getName(), i, 1);
+            modeloTablaCliente.setValueAt(cliente.getLast_name(), i, 2);
+        }
     }//GEN-LAST:event_lblAbrirPanelClienteMouseClicked
 
     private void btnDetallesRentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesRentaMouseClicked
-
+        //prrofewfwef
+        modeloTablaLibrosDetalle.setNumRows(0);
+        modeloTablaLibrosDetalle.setNumRows(0);
+        FunctionsRent function = new FunctionsRent();
+        int idUltimaRenta = function.GetLastRentByUser(Integer.parseInt(lblIdClienteReimprimir.getText()));
+        lblIdRentaReimprimir.setText(""+idUltimaRenta);
+        modeloTablaLibrosDetalle.addColumn("Libros");
+        
+        ArrayList<String> lista = function.DetailRent(idUltimaRenta);
+        int cantLibros =lista.size();
+        modeloTablaLibrosDetalle.setNumRows(cantLibros);
+        for (int i = 0; i < cantLibros; i++) {
+            String titulo = lista.get(i);
+            modeloTablaLibrosDetalle.setValueAt(titulo, i, 0);
+        }
     }//GEN-LAST:event_btnDetallesRentaMouseClicked
 
     private void btnDetallesRentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetallesRentaMouseEntered
@@ -1472,7 +1542,8 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDetallesRentaMouseExited
 
     private void btnReimprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirMouseClicked
-
+        JOptionPane.showMessageDialog(this,"Reimpresion generada correctamente");
+        limpiarReimprimir();
     }//GEN-LAST:event_btnReimprimirMouseClicked
 
     private void btnReimprimirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirMouseEntered
@@ -1485,6 +1556,7 @@ public class PanelMantenimientos extends javax.swing.JPanel {
 
     private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
         // TODO add your handling code here:
+        limpiarReimprimir();
     }//GEN-LAST:event_btnLimpiarMouseClicked
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
@@ -1494,6 +1566,53 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarMouseExited
+
+    private void TablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaClientesMouseClicked
+        int index = TablaClientes.getSelectedRow();
+        TableModel model = TablaClientes.getModel();
+        int id = Integer.parseInt(model.getValueAt(index,0).toString());
+        String name = model.getValueAt(index,1).toString()+ " "+model.getValueAt(index,2).toString();
+
+        //test
+        //JOptionPane.showMessageDialog(this, id+" y "+name);
+        //PanelLibros.idAutor = id;
+        /*PanelRenta.lblIdCliente.setText(""+id);
+        PanelRenta.txtNombreCliente.setText(name);*/
+
+        //PanelDevoluciones.txtNombreClienteDev.setText(name);
+        lblIdClienteReimprimir.setText(""+id);
+        txtNombreCliente.setText(name);
+    }//GEN-LAST:event_TablaClientesMouseClicked
+
+    private void btnBuscarAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAutorMouseClicked
+        if (txtBuscar.getText()!="") {
+            modeloTablaCliente.setRowCount(0);
+            modeloTablaCliente.setColumnCount(0);
+            modeloTablaCliente.addColumn("id");
+            modeloTablaCliente.addColumn("Nombre");
+            modeloTablaCliente.addColumn("Apellidos");
+
+            FunctionsClient funcionesCliente = new FunctionsClient();
+            ArrayList<ClassClient> lista = funcionesCliente.SearchClient(txtBuscar.getText().trim());
+
+            int cantCliente =lista.size();
+            modeloTablaCliente.setNumRows(cantCliente);
+            for (int i = 0; i < cantCliente; i++) {
+                ClassClient cliente = lista.get(i);
+                modeloTablaCliente.setValueAt(cliente.getId(), i, 0);
+                modeloTablaCliente.setValueAt(cliente.getName(), i, 1);
+                modeloTablaCliente.setValueAt(cliente.getLast_name(), i, 2);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarAutorMouseClicked
+
+    private void btnBuscarAutorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAutorMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarAutorMouseEntered
+
+    private void btnBuscarAutorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAutorMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarAutorMouseExited
 
     //Funciones propias
     private void limpiarFormCategoria(){
@@ -1538,18 +1657,27 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         lblEditandoUser.setVisible(false);
     }
     
+    private void limpiarReimprimir(){
+        txtNombreCliente.setText("");
+        lblIdRentaReimprimir.setText(""+0);
+        lblIdClienteReimprimir.setText(""+0);
+        modeloTablaLibrosDetalle.setNumRows(0);
+        modeloTablaLibrosDetalle.setNumRows(0);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelEditorial;
-    private javax.swing.JPanel PanelForaneo;
+    public javax.swing.JPanel PanelReimprimir;
     private javax.swing.JPanel PanelUsuarios;
     private javax.swing.JPanel PanelUsuarios1;
     private javax.swing.JPanel PanelUsuarios2;
-    private javax.swing.JPanel PanelUsuarios3;
     private javax.swing.JTable TablaAutores;
     private javax.swing.JTable TablaCategorias;
+    private javax.swing.JTable TablaClientes;
     private javax.swing.JTable TablaEditorial;
     private javax.swing.JTable TablaLibros;
     private javax.swing.JTable TablaUsuarios;
+    private javax.swing.JPanel btnBuscarAutor;
     private javax.swing.JPanel btnDeleteAutor;
     private javax.swing.JPanel btnDeleteCategoria;
     private javax.swing.JPanel btnDeleteUser;
@@ -1587,6 +1715,8 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1597,9 +1727,11 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1616,16 +1748,17 @@ public class PanelMantenimientos extends javax.swing.JPanel {
     private javax.swing.JLabel lblEditandoUser;
     private javax.swing.JLabel lblIdAutor;
     private javax.swing.JLabel lblIdCategorias;
-    public static javax.swing.JLabel lblIdCliente;
+    public static javax.swing.JLabel lblIdClienteReimprimir;
     private javax.swing.JLabel lblIdEditorial;
+    private javax.swing.JLabel lblIdRentaReimprimir;
     private javax.swing.JLabel lblIdUser;
-    private javax.swing.JLabel lblRenta;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblTitulo2;
     private javax.swing.JLabel lblTitulo3;
     private javax.swing.JLabel lblTitulo4;
     private javax.swing.JTextField txtApellidoUsuario;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescriptionAutor;
     private javax.swing.JTextField txtDescriptionCategoria;
     private javax.swing.JTextField txtDescriptionEditorial;
