@@ -28,6 +28,11 @@
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
         </dependency>
+        <dependency>
+            <groupId>GroupID</groupId>
+            <artifactId>ArtifactID</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -104,7 +104,7 @@ public class FunctionsAutor {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from author");
+           st = conn.prepareStatement("select * from author order by id_author desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_author=rs.getInt("id_author");
@@ -136,7 +136,7 @@ public class FunctionsAutor {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from author where last_name = "+search);
+           st = conn.prepareStatement("select * from author where last_name = "+search +" order by id_author desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_author=rs.getInt("id_author");

@@ -127,7 +127,7 @@ public class FunctionsClient {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from client");
+           st = conn.prepareStatement("select * from client order by id_client desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_client=rs.getInt("id_client");

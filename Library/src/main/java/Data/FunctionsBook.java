@@ -117,7 +117,7 @@ public class FunctionsBook {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from book");
+           st = conn.prepareStatement("select * from book order by id_book desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_book=rs.getInt("id_book");
@@ -155,7 +155,7 @@ public class FunctionsBook {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select  * from book where  title like '%"+search+"%'");
+           st = conn.prepareStatement("select  * from book where  title like '%"+search+"%'"+" order by id_book desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_book=rs.getInt("id_book");

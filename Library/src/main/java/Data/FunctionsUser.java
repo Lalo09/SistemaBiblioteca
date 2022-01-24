@@ -110,7 +110,7 @@ public class FunctionsUser {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from user");
+           st = conn.prepareStatement("select * from user order by id_user desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_user=rs.getInt("id_user");

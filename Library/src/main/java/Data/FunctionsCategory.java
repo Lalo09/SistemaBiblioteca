@@ -105,7 +105,7 @@ public class FunctionsCategory {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from category");
+           st = conn.prepareStatement("select * from category order by id_category desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_category=rs.getInt("id_category");
@@ -137,7 +137,7 @@ public class FunctionsCategory {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from category where name = "+search);
+           st = conn.prepareStatement("select * from category where name = "+search+" order by id_category desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_category=rs.getInt("id_category");

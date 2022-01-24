@@ -105,7 +105,7 @@ public class FunctionsEditorial {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("select * from editorial");
+           st = conn.prepareStatement("select * from editorial order by id_editorial desc");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_editorial=rs.getInt("id_editorial");
