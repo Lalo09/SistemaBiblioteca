@@ -26,13 +26,14 @@ public class PanelRenta extends javax.swing.JPanel {
     /**
      * Creates new form PanelRenta
      */
-    public PanelRenta() {
+    public PanelRenta(int idUser) {
         initComponents();
         lblIdCliente.setVisible(false);
         lblIdLibro.setVisible(false);
         lblPrecioRentaLibro.setVisible(false);
         lblIdRenta.setVisible(false);
         lblIdUser.setVisible(false);
+        lblIdUser.setText(""+idUser);
     }
 
     /**

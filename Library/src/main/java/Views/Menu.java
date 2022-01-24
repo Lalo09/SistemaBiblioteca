@@ -12,15 +12,17 @@ import java.awt.Color;
  * @author eduardo
  */
 public class Menu extends javax.swing.JFrame {
+    
+    int idUser=0;
 
     public static String name = config.NAME;
     /**
      * Creates new form Login
      */
-    public Menu() {
+    public Menu(int idUserFromLogin) {
         
         initComponents();
-        
+        idUser = idUserFromLogin;
     }
 
     /**
@@ -300,7 +302,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDevolucionMouseExited
 
     private void btnRentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRentaMouseClicked
-        PanelRenta pRenta = new PanelRenta();
+        PanelRenta pRenta = new PanelRenta(idUser);
         pRenta.setSize(850, 670);
         pRenta.setLocation(0, 0);
         
@@ -388,7 +390,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+               // new Menu(4).setVisible(true);
             }
         });
         

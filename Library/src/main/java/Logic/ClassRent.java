@@ -19,6 +19,17 @@ public class ClassRent {
     private int id_user;
     private String notes;
 
+    
+    private String client;
+    
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
     public ClassRent(int id_rent, double total, String rent_date, String return_date, String status, int id_client, int id_user, String notes) {
         this.id_rent = id_rent;
         this.total = total;
@@ -27,6 +38,16 @@ public class ClassRent {
         this.status = status;
         this.id_client = id_client;
         this.id_user = id_user;
+        this.notes = notes;
+    }
+    
+    public ClassRent(int id_rent, double total, String rent_date, String return_date, String status, String client, String notes) {
+        this.id_rent = id_rent;
+        this.total = total;
+        this.rent_date = rent_date;
+        this.return_date = return_date;
+        this.status = status;
+        this.client = client;
         this.notes = notes;
     }
 

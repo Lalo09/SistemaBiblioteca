@@ -186,4 +186,44 @@ public class FunctionsRent {
        return lista;
    }
     
+    public ArrayList<ClassRent> ReportRent(){
+       ArrayList<ClassRent> lista = new ArrayList<ClassRent>();
+       
+       try {
+           conn = DriverManager.getConnection(ruta,usuario,pass);
+           String query = "select id_rent,total,status_date,return_date,status,CONCAT(c.name,' ',c.last_name) as cliente ,notes from rent r ";
+           query += "inner join client c on r.id_client = c.id_client ";
+           query += "order by id_rent DESC ";
+           System.out.println(query);
+           st = conn.prepareStatement(query);
+           rs = st.executeQuery();
+           while (rs.next()) {               
+               int id_rent=rs.getInt("id_rent");
+               double total=rs.getDouble("total");
+               String status_date=rs.getString("status_date");
+               String return_date=rs.getString("return_date");
+               String status=rs.getString("status");
+               String client = rs.getString("cliente");
+               String notes=rs.getString("notes");
+               
+               ClassRent rent = new ClassRent(id_rent, total, status_date, return_date, status, client, notes);
+               lista.add(rent);
+               //System.err.println(client.toString()+"/n");
+           }
+           conn.close();
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       finally{
+           try {
+               //Cierre de conexion
+               st.close();
+               conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return lista;
+   }
+    
 }

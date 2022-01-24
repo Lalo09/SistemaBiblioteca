@@ -4,7 +4,15 @@
  */
 package Views;
 
+import Data.FunctionsBook;
+import Data.FunctionsClient;
+import Data.FunctionsRent;
+import Logic.ClassBook;
+import Logic.ClassClient;
+import Logic.ClassRent;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,11 +20,112 @@ import java.awt.Color;
  */
 public class PanelReportes extends javax.swing.JPanel {
 
+    DefaultTableModel modeloTablaLibros = new DefaultTableModel();
+    DefaultTableModel modeloTablaCliente = new DefaultTableModel();
+    DefaultTableModel modeloTablaRenta = new DefaultTableModel();
     /**
      * Creates new form PanelReportes
      */
     public PanelReportes() {
         initComponents();
+        CargarColumnasLibro();
+        CargarColumnasCliente();
+        CargarColumnasRenta();
+        lblIdCategorias.setVisible(false);
+        lblIdClientes.setVisible(false);
+        lblidRentas.setVisible(false);
+    }
+    
+    private void CargarColumnasLibro(){
+       modeloTablaLibros.addColumn("id");
+       modeloTablaLibros.addColumn("Titulo");
+       modeloTablaLibros.addColumn("Volumen");
+       modeloTablaLibros.addColumn("Paginas");
+       modeloTablaLibros.addColumn("Copias");
+       modeloTablaLibros.addColumn("Precio renta");
+       modeloTablaLibros.addColumn("Autor");
+       modeloTablaLibros.addColumn("Editorial");
+       modeloTablaLibros.addColumn("Categoria");
+       
+       FunctionsBook funcionesLibro = new FunctionsBook();
+       ArrayList<ClassBook> lista = funcionesLibro.ReportBooks();
+       
+       int cantBooks =lista.size();
+       modeloTablaLibros.setNumRows(cantBooks);
+       for (int i = 0; i < cantBooks; i++) {
+            ClassBook book = lista.get(i);
+            modeloTablaLibros.setValueAt(book.getIdBook(), i, 0);
+            modeloTablaLibros.setValueAt(book.getTitle(), i, 1);
+            modeloTablaLibros.setValueAt(book.getVolume(), i, 2);
+            modeloTablaLibros.setValueAt(book.getPages(), i, 3);
+            modeloTablaLibros.setValueAt(book.getCopies(), i, 4);
+            modeloTablaLibros.setValueAt(book.getRent_price(), i, 5);
+            modeloTablaLibros.setValueAt(book.getAuthor(), i, 6);
+            modeloTablaLibros.setValueAt(book.getEditorial(), i, 7);
+            modeloTablaLibros.setValueAt(book.getCategoria(), i, 8);
+        }
+    }
+    
+    private void CargarColumnasCliente(){
+       modeloTablaCliente.addColumn("id");
+       modeloTablaCliente.addColumn("Nombre");
+       modeloTablaCliente.addColumn("Apellidos");
+       modeloTablaCliente.addColumn("Email");
+       modeloTablaCliente.addColumn("Telefono");
+       modeloTablaCliente.addColumn("Edad");
+       modeloTablaCliente.addColumn("Calle");
+       modeloTablaCliente.addColumn("Num int");
+       modeloTablaCliente.addColumn("Num ext");
+       modeloTablaCliente.addColumn("Ciudad");
+       modeloTablaCliente.addColumn("Estado");
+       modeloTablaCliente.addColumn("Pais");
+       
+       FunctionsClient funcionesCliente = new FunctionsClient();
+       ArrayList<ClassClient> lista = funcionesCliente.ShowClients();
+       
+       int cantCliente =lista.size();
+       modeloTablaCliente.setNumRows(cantCliente);
+       for (int i = 0; i < cantCliente; i++) {
+            ClassClient cliente = lista.get(i);
+            modeloTablaCliente.setValueAt(cliente.getId(), i, 0);
+            modeloTablaCliente.setValueAt(cliente.getName(), i, 1);
+            modeloTablaCliente.setValueAt(cliente.getLast_name(), i, 2);
+            modeloTablaCliente.setValueAt(cliente.getEmail(), i, 3);
+            modeloTablaCliente.setValueAt(cliente.getPhone(), i, 4);
+            modeloTablaCliente.setValueAt(cliente.getAge(), i, 5);
+            modeloTablaCliente.setValueAt(cliente.getStreet(), i, 6);
+            modeloTablaCliente.setValueAt(cliente.getNum_int(), i, 7);
+            modeloTablaCliente.setValueAt(cliente.getNum_ext(), i, 8);
+            modeloTablaCliente.setValueAt(cliente.getCity(), i, 9);
+            modeloTablaCliente.setValueAt(cliente.getState(), i, 10);
+            modeloTablaCliente.setValueAt(cliente.getCountry(), i, 11);
+        }
+    }
+    
+    private void CargarColumnasRenta(){
+       modeloTablaRenta.addColumn("id");
+       modeloTablaRenta.addColumn("Total");
+       modeloTablaRenta.addColumn("Fecha renta");
+       modeloTablaRenta.addColumn("Fecha devolucion");
+       modeloTablaRenta.addColumn("Status");
+       modeloTablaRenta.addColumn("Cliente");
+       modeloTablaRenta.addColumn("Notas");
+       
+       FunctionsRent funcionesRenta = new FunctionsRent();
+       ArrayList<ClassRent> lista = funcionesRenta.ReportRent();
+       
+       int cantBooks =lista.size();
+       modeloTablaRenta.setNumRows(cantBooks);
+       for (int i = 0; i < cantBooks; i++) {
+            ClassRent rent = lista.get(i);
+            modeloTablaRenta.setValueAt(rent.getId_rent(), i, 0);
+            modeloTablaRenta.setValueAt(rent.getTotal(), i, 1);
+            modeloTablaRenta.setValueAt(rent.getRent_date(), i, 2);
+            modeloTablaRenta.setValueAt(rent.getReturn_date(), i, 3);
+            modeloTablaRenta.setValueAt(rent.getStatus(), i, 4);
+            modeloTablaRenta.setValueAt(rent.getClient(), i, 5);
+            modeloTablaRenta.setValueAt(rent.getNotes(), i, 6);
+        }
     }
 
     /**
@@ -33,32 +142,30 @@ public class PanelReportes extends javax.swing.JPanel {
         PanelUsuarios = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaCategorias = new javax.swing.JTable();
+        TablaLibros = new javax.swing.JTable();
         btnSaveCategoria = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        btnReporteLibros = new javax.swing.JLabel();
         btnLimpiarCategoria = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         lblIdCategorias = new javax.swing.JLabel();
         PanelUsuarios2 = new javax.swing.JPanel();
         lblTitulo3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        TablaCategorias1 = new javax.swing.JTable();
-        btnSaveCategoria1 = new javax.swing.JPanel();
+        TablaRentas = new javax.swing.JTable();
+        btnReporteRentas = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnLimpiarCategoria1 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
-        lblIdCategorias1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        lblidRentas = new javax.swing.JLabel();
         PanelUsuarios3 = new javax.swing.JPanel();
         lblTitulo4 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        TablaCategorias2 = new javax.swing.JTable();
-        btnSaveCategoria2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        TablaClientes = new javax.swing.JTable();
+        btnReporteLibro = new javax.swing.JPanel();
+        btnReporteClientes = new javax.swing.JLabel();
         btnLimpiarCategoria2 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
-        lblIdCategorias2 = new javax.swing.JLabel();
+        lblIdClientes = new javax.swing.JLabel();
 
         PanelUsuarios.setBackground(new java.awt.Color(244, 244, 244));
         PanelUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,12 +175,13 @@ public class PanelReportes extends javax.swing.JPanel {
         lblTitulo.setText("Reporte de libros");
         PanelUsuarios.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
 
-        TablaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaLibros.setModel(modeloTablaLibros);
+        TablaLibros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaCategoriasMouseClicked(evt);
+                TablaLibrosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(TablaCategorias);
+        jScrollPane1.setViewportView(TablaLibros);
 
         PanelUsuarios.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 730, 440));
 
@@ -91,8 +199,8 @@ public class PanelReportes extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(253, 251, 251));
-        jLabel1.setText("Generar reporte");
+        btnReporteLibros.setForeground(new java.awt.Color(253, 251, 251));
+        btnReporteLibros.setText("Generar reporte");
 
         javax.swing.GroupLayout btnSaveCategoriaLayout = new javax.swing.GroupLayout(btnSaveCategoria);
         btnSaveCategoria.setLayout(btnSaveCategoriaLayout);
@@ -100,14 +208,14 @@ public class PanelReportes extends javax.swing.JPanel {
             btnSaveCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSaveCategoriaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(btnReporteLibros, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
         btnSaveCategoriaLayout.setVerticalGroup(
             btnSaveCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnSaveCategoriaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(btnReporteLibros, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -164,50 +272,51 @@ public class PanelReportes extends javax.swing.JPanel {
         lblTitulo3.setText("Reporte de rentas");
         PanelUsuarios2.add(lblTitulo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
 
-        TablaCategorias1.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaRentas.setModel(modeloTablaRenta);
+        TablaRentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaCategorias1MouseClicked(evt);
+                TablaRentasMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(TablaCategorias1);
+        jScrollPane4.setViewportView(TablaRentas);
 
-        PanelUsuarios2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 730, 380));
+        PanelUsuarios2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 730, 440));
 
-        btnSaveCategoria1.setBackground(new java.awt.Color(85, 211, 128));
-        btnSaveCategoria1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSaveCategoria1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReporteRentas.setBackground(new java.awt.Color(85, 211, 128));
+        btnReporteRentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReporteRentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSaveCategoria1MouseClicked(evt);
+                btnReporteRentasMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSaveCategoria1MouseEntered(evt);
+                btnReporteRentasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSaveCategoria1MouseExited(evt);
+                btnReporteRentasMouseExited(evt);
             }
         });
 
         jLabel2.setForeground(new java.awt.Color(253, 251, 251));
         jLabel2.setText("Generar reporte");
 
-        javax.swing.GroupLayout btnSaveCategoria1Layout = new javax.swing.GroupLayout(btnSaveCategoria1);
-        btnSaveCategoria1.setLayout(btnSaveCategoria1Layout);
-        btnSaveCategoria1Layout.setHorizontalGroup(
-            btnSaveCategoria1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSaveCategoria1Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnReporteRentasLayout = new javax.swing.GroupLayout(btnReporteRentas);
+        btnReporteRentas.setLayout(btnReporteRentasLayout);
+        btnReporteRentasLayout.setHorizontalGroup(
+            btnReporteRentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReporteRentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        btnSaveCategoria1Layout.setVerticalGroup(
-            btnSaveCategoria1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSaveCategoria1Layout.createSequentialGroup()
+        btnReporteRentasLayout.setVerticalGroup(
+            btnReporteRentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnReporteRentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        PanelUsuarios2.add(btnSaveCategoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 150, 60));
+        PanelUsuarios2.add(btnReporteRentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 150, 60));
 
         btnLimpiarCategoria1.setBackground(new java.awt.Color(151, 151, 151));
         btnLimpiarCategoria1.setForeground(new java.awt.Color(254, 254, 254));
@@ -247,14 +356,8 @@ public class PanelReportes extends javax.swing.JPanel {
 
         PanelUsuarios2.add(btnLimpiarCategoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 530, 100, 60));
 
-        lblIdCategorias1.setText("0");
-        PanelUsuarios2.add(lblIdCategorias1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
-
-        jRadioButton1.setText("Ultimo mes");
-        PanelUsuarios2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
-
-        jRadioButton2.setText("Todo");
-        PanelUsuarios2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+        lblidRentas.setText("0");
+        PanelUsuarios2.add(lblidRentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
 
         jTabbedPane1.addTab("Reporte de rentas", PanelUsuarios2);
 
@@ -266,50 +369,51 @@ public class PanelReportes extends javax.swing.JPanel {
         lblTitulo4.setText("Reporte de clientes");
         PanelUsuarios3.add(lblTitulo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
 
-        TablaCategorias2.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaClientes.setModel(modeloTablaCliente);
+        TablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaCategorias2MouseClicked(evt);
+                TablaClientesMouseClicked(evt);
             }
         });
-        jScrollPane5.setViewportView(TablaCategorias2);
+        jScrollPane5.setViewportView(TablaClientes);
 
         PanelUsuarios3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 730, 440));
 
-        btnSaveCategoria2.setBackground(new java.awt.Color(85, 211, 128));
-        btnSaveCategoria2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSaveCategoria2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReporteLibro.setBackground(new java.awt.Color(85, 211, 128));
+        btnReporteLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReporteLibro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSaveCategoria2MouseClicked(evt);
+                btnReporteLibroMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSaveCategoria2MouseEntered(evt);
+                btnReporteLibroMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSaveCategoria2MouseExited(evt);
+                btnReporteLibroMouseExited(evt);
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(253, 251, 251));
-        jLabel3.setText("Generar reporte");
+        btnReporteClientes.setForeground(new java.awt.Color(253, 251, 251));
+        btnReporteClientes.setText("Generar reporte");
 
-        javax.swing.GroupLayout btnSaveCategoria2Layout = new javax.swing.GroupLayout(btnSaveCategoria2);
-        btnSaveCategoria2.setLayout(btnSaveCategoria2Layout);
-        btnSaveCategoria2Layout.setHorizontalGroup(
-            btnSaveCategoria2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSaveCategoria2Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnReporteLibroLayout = new javax.swing.GroupLayout(btnReporteLibro);
+        btnReporteLibro.setLayout(btnReporteLibroLayout);
+        btnReporteLibroLayout.setHorizontalGroup(
+            btnReporteLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReporteLibroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(btnReporteClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        btnSaveCategoria2Layout.setVerticalGroup(
-            btnSaveCategoria2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSaveCategoria2Layout.createSequentialGroup()
+        btnReporteLibroLayout.setVerticalGroup(
+            btnReporteLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnReporteLibroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(btnReporteClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        PanelUsuarios3.add(btnSaveCategoria2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 150, 60));
+        PanelUsuarios3.add(btnReporteLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, 150, 60));
 
         btnLimpiarCategoria2.setBackground(new java.awt.Color(151, 151, 151));
         btnLimpiarCategoria2.setForeground(new java.awt.Color(254, 254, 254));
@@ -349,8 +453,8 @@ public class PanelReportes extends javax.swing.JPanel {
 
         PanelUsuarios3.add(btnLimpiarCategoria2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 530, 100, 60));
 
-        lblIdCategorias2.setText("0");
-        PanelUsuarios3.add(lblIdCategorias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
+        lblIdClientes.setText("0");
+        PanelUsuarios3.add(lblIdClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
 
         jTabbedPane1.addTab("Reporte de clientes", PanelUsuarios3);
 
@@ -389,9 +493,9 @@ public class PanelReportes extends javax.swing.JPanel {
        
     }//GEN-LAST:event_btnLimpiarCategoriaMouseClicked
 
-    private void TablaCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCategoriasMouseClicked
+    private void TablaLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaLibrosMouseClicked
         
-    }//GEN-LAST:event_TablaCategoriasMouseClicked
+    }//GEN-LAST:event_TablaLibrosMouseClicked
 
     private void btnSaveCategoriaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveCategoriaMouseExited
         btnSaveCategoria.setBackground(new Color(85,211,128));
@@ -405,21 +509,21 @@ public class PanelReportes extends javax.swing.JPanel {
        
     }//GEN-LAST:event_btnSaveCategoriaMouseClicked
 
-    private void TablaCategorias1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCategorias1MouseClicked
+    private void TablaRentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRentasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_TablaCategorias1MouseClicked
+    }//GEN-LAST:event_TablaRentasMouseClicked
 
-    private void btnSaveCategoria1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveCategoria1MouseClicked
+    private void btnReporteRentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteRentasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveCategoria1MouseClicked
+    }//GEN-LAST:event_btnReporteRentasMouseClicked
 
-    private void btnSaveCategoria1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveCategoria1MouseEntered
+    private void btnReporteRentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteRentasMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveCategoria1MouseEntered
+    }//GEN-LAST:event_btnReporteRentasMouseEntered
 
-    private void btnSaveCategoria1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveCategoria1MouseExited
+    private void btnReporteRentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteRentasMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveCategoria1MouseExited
+    }//GEN-LAST:event_btnReporteRentasMouseExited
 
     private void btnLimpiarCategoria1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarCategoria1MouseClicked
         // TODO add your handling code here:
@@ -433,21 +537,21 @@ public class PanelReportes extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarCategoria1MouseExited
 
-    private void TablaCategorias2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCategorias2MouseClicked
+    private void TablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaClientesMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_TablaCategorias2MouseClicked
+    }//GEN-LAST:event_TablaClientesMouseClicked
 
-    private void btnSaveCategoria2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveCategoria2MouseClicked
+    private void btnReporteLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteLibroMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveCategoria2MouseClicked
+    }//GEN-LAST:event_btnReporteLibroMouseClicked
 
-    private void btnSaveCategoria2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveCategoria2MouseEntered
+    private void btnReporteLibroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteLibroMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveCategoria2MouseEntered
+    }//GEN-LAST:event_btnReporteLibroMouseEntered
 
-    private void btnSaveCategoria2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveCategoria2MouseExited
+    private void btnReporteLibroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteLibroMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveCategoria2MouseExited
+    }//GEN-LAST:event_btnReporteLibroMouseExited
 
     private void btnLimpiarCategoria2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarCategoria2MouseClicked
         // TODO add your handling code here:
@@ -466,33 +570,31 @@ public class PanelReportes extends javax.swing.JPanel {
     private javax.swing.JPanel PanelUsuarios;
     private javax.swing.JPanel PanelUsuarios2;
     private javax.swing.JPanel PanelUsuarios3;
-    private javax.swing.JTable TablaCategorias;
-    private javax.swing.JTable TablaCategorias1;
-    private javax.swing.JTable TablaCategorias2;
+    private javax.swing.JTable TablaClientes;
+    private javax.swing.JTable TablaLibros;
+    private javax.swing.JTable TablaRentas;
     private javax.swing.JPanel btnLimpiarCategoria;
     private javax.swing.JPanel btnLimpiarCategoria1;
     private javax.swing.JPanel btnLimpiarCategoria2;
+    private javax.swing.JLabel btnReporteClientes;
+    private javax.swing.JPanel btnReporteLibro;
+    private javax.swing.JLabel btnReporteLibros;
+    private javax.swing.JPanel btnReporteRentas;
     private javax.swing.JPanel btnSaveCategoria;
-    private javax.swing.JPanel btnSaveCategoria1;
-    private javax.swing.JPanel btnSaveCategoria2;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblIdCategorias;
-    private javax.swing.JLabel lblIdCategorias1;
-    private javax.swing.JLabel lblIdCategorias2;
+    private javax.swing.JLabel lblIdClientes;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo3;
     private javax.swing.JLabel lblTitulo4;
+    private javax.swing.JLabel lblidRentas;
     // End of variables declaration//GEN-END:variables
 }

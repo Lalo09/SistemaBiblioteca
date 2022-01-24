@@ -137,5 +137,38 @@ public class FunctionsUser {
        return lista;
    }
     
-    
+    public int Login(String email, String password){
+        ArrayList<Integer> lista = new ArrayList<Integer>();
+       int id = 0;
+       try {
+           conn = DriverManager.getConnection(ruta,usuario,pass);
+           st = conn.prepareStatement("SELECT id_user from `user` u where email = '"+email+"' and password = '"+password+"';");
+           rs = st.executeQuery();
+           while (rs.next()) {               
+               id=rs.getInt("id_user");
+               lista.add(id);
+           }
+           conn.close();
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       finally{
+           try {
+               //Cierre de conexion
+               st.close();
+               conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       
+       if (lista.isEmpty()) {
+               //No loguearse
+               return 0;
+           }
+           else{
+              //Loguearse
+              return id;
+           }
+    }
 }

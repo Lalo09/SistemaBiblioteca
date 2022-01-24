@@ -19,6 +19,35 @@ public class ClassBook {
     public int id_author;
     public int id_editorial;
     public int id_category;
+    
+    //Para reporte
+    public String author;
+    public String editorial;
+    public String categoria;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     @Override
     public String toString() {
@@ -35,6 +64,18 @@ public class ClassBook {
         this.id_author = id_author;
         this.id_editorial = id_editorial;
         this.id_category = id_category;
+    }
+    
+    public ClassBook(int idBook, String title, String volume, int pages, int copies, double rent_price, String author, String editorial, String category) {
+        this.idBook = idBook;
+        this.title = title;
+        this.volume = volume;
+        this.pages = pages;
+        this.copies = copies;
+        this.rent_price = rent_price;
+        this.author = author;
+        this.editorial = editorial;
+        this.categoria = category;
     }
 
     public int getIdBook() {

@@ -5,6 +5,7 @@
 package Views;
 import Settings.config;
 import java.awt.Color;
+import Data.FunctionsUser;
 
 //import Data.FunctionsCategory;
 //import Logic.ClassCategory;
@@ -48,10 +49,10 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         btnEnter = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -80,17 +81,17 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("Nombre de usuario:");
         Background.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(68, 68, 68));
-        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Background.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 320, 30));
+        txtEmail.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(68, 68, 68));
+        txtEmail.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Background.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 320, 30));
         Background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 320, 10));
         Background.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 320, 10));
 
-        jPasswordField1.setFont(new java.awt.Font("C059", 0, 14)); // NOI18N
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPasswordField1.setEchoChar('x');
-        Background.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 320, -1));
+        txtPassword.setFont(new java.awt.Font("C059", 0, 14)); // NOI18N
+        txtPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtPassword.setEchoChar('x');
+        Background.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 320, -1));
 
         btnEnter.setBackground(new java.awt.Color(85, 211, 128));
         btnEnter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -143,7 +144,17 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseClicked
-        // TODO add your handling code here:
+        FunctionsUser function = new FunctionsUser();
+        int idUsuario = function.Login(txtEmail.getText().trim(),txtPassword.getText().trim());
+        if (idUsuario==0) {
+            JOptionPane.showMessageDialog(this,"Usuario  y/o contraseña incorrecto");
+        }
+        else{
+            //JOptionPane.showMessageDialog(this,"Login correcto: "+idUsuario);
+            Menu menu = new Menu(idUsuario);
+            menu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnEnterMouseClicked
 
     private void btnEnterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterMouseEntered
@@ -201,9 +212,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
