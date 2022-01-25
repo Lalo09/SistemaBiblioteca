@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6ec0dfba-0482-42dc-87bc-337f28577242">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_renta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select r2.id_rent, b2.title, rd.rent_price, r2.status_date, r2.return_date, CONCAT(c2.name,' ',c2.last_name) as cliente 
+from rent_detail rd 
+inner join book b2 on rd.id_book = b2.id_book 
+inner join rent r2 on rd.id_rent = r2.id_rent
+inner join client c2 on r2.id_client = c2.id_client
+where r2.id_rent = $P!{id_renta} ;]]>
+	</queryString>
+	<field name="id_rent" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rent_price" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="return_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String"/>
+	<variable name="id_rent_1" class="java.lang.Integer" resetType="Page" calculation="First">
+		<variableExpression><![CDATA[$F{id_rent}]]></variableExpression>
+	</variable>
+	<variable name="cliente_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{cliente}]]></variableExpression>
+	</variable>
+	<variable name="status_date_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{status_date}]]></variableExpression>
+	</variable>
+	<variable name="return_date_1" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{return_date}]]></variableExpression>
+	</variable>
+	<variable name="rent_price_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{rent_price}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="187" y="17" width="230" height="49" uuid="53c33447-0ffb-4311-b485-6b6c6f52d579"/>
+				<textElement>
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Renta de libro]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<textField evaluationTime="Page">
+				<reportElement x="455" y="0" width="100" height="20" uuid="550584e6-840d-449d-8d1a-a1685a3c12f5"/>
+				<textFieldExpression><![CDATA[$V{id_rent_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="4" width="100" height="20" uuid="2969fdc5-d7ea-42cb-9cd3-0d4f26f9f5d2"/>
+				<textFieldExpression><![CDATA[$F{status_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="4" width="100" height="20" uuid="651e606e-79e6-4a69-accb-cacff9ce9c75"/>
+				<textFieldExpression><![CDATA[$F{return_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="305" y="4" width="100" height="20" uuid="6d5153e1-ea6b-49d4-a8a5-cca6f50d3815"/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="151" y="2" width="100" height="20" uuid="a234546c-d5d1-4d17-a2ee-49a4c469154f"/>
+				<text><![CDATA[title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="2" width="100" height="20" uuid="b7ee20ca-aa7f-4135-8694-92a57fcbf5aa"/>
+				<text><![CDATA[rent_price]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="151" y="17" width="100" height="20" uuid="974dff5c-a9ca-4419-8a1d-df9f7961753f"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="17" width="100" height="20" uuid="aa116646-9563-4d3a-b1bb-a9de212c5a0b"/>
+				<textFieldExpression><![CDATA[$F{rent_price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="269" y="0" width="100" height="20" uuid="6c199d4d-acb7-4b14-ae76-4647a191311e"/>
+				<textFieldExpression><![CDATA[$V{rent_price_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

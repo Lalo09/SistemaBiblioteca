@@ -497,7 +497,7 @@ public class PanelClientes extends javax.swing.JPanel {
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         if (txtBuscador.getText()!="") {
-            limpiarFormCliente();
+            //limpiarFormCliente();
 
             FunctionsClient funcionesCliente = new FunctionsClient();
             ArrayList<ClassClient> lista = funcionesCliente.SearchClient(txtBuscador.getText().trim());

@@ -16,11 +16,21 @@ import Data.FunctionsClient;
 import Data.FunctionsRent;
 import Data.FunctionsUser;
 import Logic.ClassClient;
+import Settings.config;
 import java.awt.BorderLayout;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
 *Notas:
@@ -62,6 +72,7 @@ public class PanelMantenimientos extends javax.swing.JPanel {
         lblEditandoAutor.setVisible(false);
         lblIdUser.setVisible(false);
         lblEditandoUser.setVisible(false);
+        lblIdRentaReimprimir.setVisible(false);
     } 
     
     //Metodo para cargar las columnas en la tabla categoria
@@ -1543,6 +1554,29 @@ public class PanelMantenimientos extends javax.swing.JPanel {
 
     private void btnReimprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirMouseClicked
         JOptionPane.showMessageDialog(this,"Reimpresion generada correctamente");
+        try {
+                int idRenta = Integer.parseInt(lblIdRentaReimprimir.getText());
+                config con = new config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reports/report1.jasper";
+                
+                Map param = new HashMap();
+                param.put("id_renta", idRenta);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,param,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
         limpiarReimprimir();
     }//GEN-LAST:event_btnReimprimirMouseClicked
 

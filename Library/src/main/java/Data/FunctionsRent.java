@@ -31,7 +31,7 @@ public class FunctionsRent {
             conn = DriverManager.getConnection(ruta,usuario,pass);
             String sql = "INSERT INTO rent (total, status_date, return_date, status, id_client, id_user, notes) "
                    +"VALUES(?,'"+dateFormat.format(date)+"',?,'F',?,?,'')";
-            System.out.print(sql);
+            //System.out.print(sql);
             st = conn.prepareStatement(sql);
             st.setDouble(1,rent.getTotal());
             st.setString(2,rent.getReturn_date());
@@ -59,7 +59,7 @@ public class FunctionsRent {
             conn = DriverManager.getConnection(ruta,usuario,pass);
             String sql = "INSERT INTO rent_detail (id_book, rent_price, id_rent) "
                    +"VALUES(?,?,?)";
-            System.out.print(sql);
+            //System.out.print(sql);
             st = conn.prepareStatement(sql);
             st.setInt(1,rentDetail.getId_book());
             st.setDouble(2,rentDetail.getRent_price());

@@ -5,9 +5,13 @@
 package Settings;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,10 +34,24 @@ public class config {
     public static void LoadDriver(){
         try { 
            Class.forName("com.mysql.jdbc.Driver");
-           //conn = DriverManager.getConnection(ruta,usuario,pass);
+           //conn = (Connection) DriverManager.getConnection(ruta,usuario,pass);
+           
+       } catch (ClassNotFoundException ex) {
+          ex.printStackTrace();
+       }
+    }
+    
+    public Connection getConexion(){
+        try { 
+           Class.forName("com.mysql.jdbc.Driver");
+           conn = (Connection) DriverManager.getConnection(ruta,usuario,pass);
            
        } catch (ClassNotFoundException ex) {
            ex.printStackTrace();
-       }
+       } catch (SQLException ex) {
+            Logger.getLogger(config.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return conn;
     }
 }

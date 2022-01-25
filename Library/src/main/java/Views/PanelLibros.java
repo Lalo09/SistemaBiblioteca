@@ -371,7 +371,17 @@ public class PanelLibros extends javax.swing.JPanel {
 
         add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 420, 100, 50));
 
-        PanelForaneo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        javax.swing.GroupLayout PanelForaneoLayout = new javax.swing.GroupLayout(PanelForaneo);
+        PanelForaneo.setLayout(PanelForaneoLayout);
+        PanelForaneoLayout.setHorizontalGroup(
+            PanelForaneoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+        PanelForaneoLayout.setVerticalGroup(
+            PanelForaneoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+
         add(PanelForaneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 390, 280));
 
         jLabel13.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -459,7 +469,7 @@ public class PanelLibros extends javax.swing.JPanel {
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         if (txtBuscar.getText()!="") {
-            LimpiarForm();
+           // LimpiarForm();
             FunctionsBook funciones = new FunctionsBook();
             FunctionsBook funcionesLibro = new FunctionsBook();
             ArrayList<ClassBook> lista = funcionesLibro.SearchBook(txtBuscar.getText().trim());

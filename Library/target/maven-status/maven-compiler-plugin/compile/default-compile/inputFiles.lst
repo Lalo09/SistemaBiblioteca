@@ -1,5 +1,7 @@
+/mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelReportes.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Data/FunctionsCategory.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelAutores.java
+/mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelClienteDevolucion.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelClienteRenta.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/Login.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelCategorias.java
@@ -14,6 +16,7 @@
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelEditoriales.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Logic/ClassBook.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelRenta.java
+/mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelDevoluciones.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Views/PanelLibroRenta.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Data/FunctionsAutor.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/libraryProject/Library/src/main/java/Data/FunctionsClient.java

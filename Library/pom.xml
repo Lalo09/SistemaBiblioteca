@@ -33,6 +33,26 @@
             <artifactId>ArtifactID</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>group-id</groupId>
+            <artifactId>artifact-id-jr</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>group</groupId>
+            <artifactId>artifact</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

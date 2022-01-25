@@ -13,7 +13,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import Settings.config;
+import java.sql.Connection;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -353,7 +364,31 @@ public class PanelRenta extends javax.swing.JPanel {
             
             LimpiarForm();
             
-            JOptionPane.showMessageDialog(this,"Renta guardada satisfactoriamente");
+            //JOptionPane.showMessageDialog(this,"Renta guardada satisfactoriamente");
+            
+            try {
+                
+                config con = new config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reports/report1.jasper";
+                
+                Map param = new HashMap();
+                param.put("id_renta", rent_number);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,param,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
             
         }else{
             JOptionPane.showMessageDialog(this,"No se ha podido realizar la renta correctamente, compruebe los datos ingresados");
@@ -412,7 +447,8 @@ public class PanelRenta extends javax.swing.JPanel {
         for (int i = 0; i < model.getRowCount(); i++) {
             total += Double.parseDouble(model.getValueAt(i,2).toString());
         }
-        lblTotalRenta.setText(""+total);
+        DecimalFormat df = new DecimalFormat("#.00");
+        lblTotalRenta.setText(""+df.format(total));
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
